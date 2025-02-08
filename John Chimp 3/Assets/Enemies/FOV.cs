@@ -14,7 +14,9 @@ public class FOV : MonoBehaviour
     //to expose to the Enemy
     public bool visible = false;
     public Vector2 dirToTarget;
+    public Vector3 targetLocation;
     public GameObject gun;
+    float startangle = 0;
 
 
 
@@ -38,7 +40,7 @@ public class FOV : MonoBehaviour
         {
             Transform player = playersInRange[i].transform;
             dirToTarget = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y);
-
+            targetLocation = player.transform.position;
             //Debug.Log(dirToTarget);
             if (Vector2.Angle(dirToTarget, transform.right) < viewAngle / 2)
             {
@@ -75,6 +77,12 @@ public class FOV : MonoBehaviour
 
     }
 
+
+    public void setRotation(float angle)
+    {
+        transform.localEulerAngles = new Vector3(0, 0, angle);
+    }
+
     private void FixedUpdate()
     {
         //if(gun)
@@ -83,32 +91,49 @@ public class FOV : MonoBehaviour
         //    gun.transform.Rotate(0, 0, angle);
         //}
         FindVisiblePlayers();
+
+
         if (visible)
         {
             Transform pappa_transform = transform.parent;
             float pappa_transform_scale = (pappa_transform.localScale.x > 0) ? 1 : -1;
+            dirToTarget = targetLocation - transform.position;
             float angle = Vector3.SignedAngle(transform.right.normalized, dirToTarget.normalized, Vector3.forward);
             transform.Rotate(0, 0, angle);
-            
+
+            ///Vector3 ea = transform.localEulerAngles;
+
         }
-        
-        
+            //if (ea.z > 90 && ea.z < 180)
+            //{
 
-        //float end_angle = transform.localEulerAngles.z;
+            //    float newAngle = 180 - (-1 * ea.z);
 
-        
-        //if (end_angle > 90 && end_angle < 180)
-        //{
-        //    end_angle = 180 - end_angle;
-        //    Vector3 temp = pappa_transform.localScale;
-        //    pappa_transform.localScale = new Vector3(-1 * temp.x, temp.y, temp.z);
-        //    transform.localEulerAngles = new Vector3(0, 0, end_angle);
 
-        //}
+            //    transform.localEulerAngles = new Vector3(0, 0, 180 - (-1 * ea.z));
+            //    transform.parent.localScale = new Vector3(pappa_transform.localScale.x * -1, pappa_transform.localScale.y, 1);
+            //}
+
+
+            //}
 
 
 
-    }
+            //float end_angle = transform.localEulerAngles.z;
+
+
+            //if (end_angle > 90 && end_angle < 180)
+            //{
+            //    end_angle = 180 - end_angle;
+            //    Vector3 temp = pappa_transform.localScale;
+            //    pappa_transform.localScale = new Vector3(-1 * temp.x, temp.y, temp.z);
+            //    transform.localEulerAngles = new Vector3(0, 0, end_angle);
+
+            //}
+
+
+
+        }
 
     // Update is called once per frame
     void Update()
