@@ -277,7 +277,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1006596488159440799, guid: d0d0979992459984fa3e6113a9d8b3a4, type: 3}
       propertyPath: m_Layer
-      value: 31
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2270250054091780206, guid: d0d0979992459984fa3e6113a9d8b3a4, type: 3}
       propertyPath: m_RootOrder
@@ -333,7 +333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4627060928946539876, guid: d0d0979992459984fa3e6113a9d8b3a4, type: 3}
       propertyPath: m_Layer
-      value: 31
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6008962855933194913, guid: d0d0979992459984fa3e6113a9d8b3a4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -349,11 +349,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6230794287535210874, guid: d0d0979992459984fa3e6113a9d8b3a4, type: 3}
       propertyPath: m_Layer
-      value: 31
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6301709056138267080, guid: d0d0979992459984fa3e6113a9d8b3a4, type: 3}
       propertyPath: m_Layer
-      value: 31
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8413674100441996211, guid: d0d0979992459984fa3e6113a9d8b3a4, type: 3}
       propertyPath: m_GravityScale

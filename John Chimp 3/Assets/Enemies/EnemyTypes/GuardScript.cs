@@ -19,12 +19,12 @@ public class GuardScript : Enemy
     public override void SpottedBehavior()
     {
         Debug.Log("Shoot");
-        //gun.shoot();
-        //target_x = fov.targetLocation.x;
+        gun.shoot();
+        target_x = fov.targetLocation.x;
         if (!fov.visible)
         {
             pursuit_time = 0;
-            currentState = State.Idle;
+            currentState = State.Pursuit;
         }
     }
 

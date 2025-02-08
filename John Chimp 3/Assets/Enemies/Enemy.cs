@@ -119,7 +119,7 @@ public class Enemy : MonoBehaviour
     }
 
 
-    public void moveToTarget(float x)
+    public bool moveToTarget(float x)
     {
         rb.velocity = new Vector2((target_x - gameObject.transform.position.x > 0 ? walkSpeed : -1 * walkSpeed), rb.velocity.y);
         facingDir = rb.velocity.x < 0 ? -1 : 1;
@@ -143,6 +143,12 @@ public class Enemy : MonoBehaviour
         {
             currentState = State.Spotted;
         }
+        if (Mathf.Abs(transform.position.x - target_x) < 0.2)
+        {
+            return true;
+        }
+        else
+            return false;
         //if (Mathf.Pow(transform.position.x, 2) >= Mathf.Pow(target_x, 2) && transform.position.x * target_x >= 0)
         //{
         //    Destroy(gameObject);
@@ -161,8 +167,8 @@ public class Enemy : MonoBehaviour
                 IdleBehavior(); break;
             case State.Spotted:
                 SpottedBehavior(); break;
-            //case State.Pursuit:
-            //    PursuitBehavior(); break;
+            case State.Pursuit:
+                PursuitBehavior(); break;
 
         }
     }
