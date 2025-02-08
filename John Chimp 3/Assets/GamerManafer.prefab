@@ -1,5 +1,70 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &567971265
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 567971267}
+  - component: {fileID: 567971266}
+  m_Layer: 0
+  m_Name: MusicManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &567971267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567971265}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.035453916, y: -0.22872093, z: 0.08325262}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1663740441774761988}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &567971266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567971265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d1750f4830d22940895cc7ae1c62c0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeInTime: 0.2
+  loopFadeTime: 0.4
+  act2target: 0
+  plan2target: 0
+  plan2: 0
+  fadeOutTime: 1
+  pm: {fileID: 0}
+  planning:
+  - parts:
+    - {fileID: 8300000, guid: cad88f87f0cdf44429a94975e3ee3c2f, type: 3}
+    - {fileID: 8300000, guid: c66bf00252bb4054ab0e8df0f1dd3504, type: 3}
+    - {fileID: 8300000, guid: 54d5060081bdf12489ef0982e20ea8b4, type: 3}
+  action:
+  - parts:
+    - {fileID: 8300000, guid: 4ac379f3a6cb1c34ea327768fd09d62f, type: 3}
+    - {fileID: 8300000, guid: a84d876bbf334a247a17e5e865576af1, type: 3}
+  death:
+  - parts:
+    - {fileID: 8300000, guid: 9f08bba3803e8824384b1b1e7155e2e4, type: 3}
+    - {fileID: 8300000, guid: 063c68154d0cde542b7518d3d1d518e5, type: 3}
+    - {fileID: 8300000, guid: 7de21fe71fd3a8a41929365f71dd269d, type: 3}
 --- !u!1 &1663740441774761990
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,6 +96,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4785274308818198001}
+  - {fileID: 567971267}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -452,7 +518,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7936740546730194627
 RectTransform:
   m_ObjectHideFlags: 0

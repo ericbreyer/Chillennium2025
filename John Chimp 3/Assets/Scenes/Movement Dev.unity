@@ -1576,14 +1576,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GamerManafer
       objectReference: {fileID: 0}
-    - target: {fileID: 3038285273303853446, guid: 6d60296ea6d6a4d0c9cb12c422a1af5b, type: 3}
-      propertyPath: m_text
-      value: yapp yapp
-      objectReference: {fileID: 0}
     - target: {fileID: 5518163583007761898, guid: 6d60296ea6d6a4d0c9cb12c422a1af5b, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1864857827}
+    - target: {fileID: 7927464072139576607, guid: 6d60296ea6d6a4d0c9cb12c422a1af5b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d60296ea6d6a4d0c9cb12c422a1af5b, type: 3}
 --- !u!1001 &5530602636207616880
