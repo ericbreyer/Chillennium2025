@@ -7,7 +7,13 @@ public class Bystander : Enemy
     public GameObject exitSpot;
     public bool bulletHeard = false;
     public GameObject copPrefab;
-    public GameObject copGoTo;
+    float x_target;
+
+    public override void Start()
+    {
+        base.Start();
+        x_target = exitSpot.transform.position.x;
+    }
 
 
     private void Update()
@@ -30,7 +36,7 @@ public class Bystander : Enemy
 
     public override void SpottedBehavior()
     {
-        if (moveToTarget(exitSpot.transform.position.x))
+        if (moveToTarget(x_target))
         {
             copPrefab.SetActive(true);
             currentState = State.Pursuit; //just don't do antyhing after this

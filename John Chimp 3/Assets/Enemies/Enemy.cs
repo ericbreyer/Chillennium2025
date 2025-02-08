@@ -121,6 +121,14 @@ public class Enemy : MonoBehaviour
 
     public bool moveToTarget(float x)
     {
+        if(x > transform.position.x)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
         rb.velocity = new Vector2((x - gameObject.transform.position.x > 0 ? walkSpeed : -1 * walkSpeed), rb.velocity.y);
         facingDir = rb.velocity.x < 0 ? -1 : 1;
         //Debug.Log("Raycast loacation: " + transform.position + " direction: " +  Vector2.right * facingDir + " Length: " + facingDir * walkSpeed * jumpTime);
