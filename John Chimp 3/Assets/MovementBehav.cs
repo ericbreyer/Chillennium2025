@@ -37,6 +37,7 @@ public class MovementBehav : MonoBehaviour
         this.sequenceTooltip.color = Color.red;
         this.sequenceTooltip.transform.parent = this.transform;
         this.sequenceTooltip.transform.localPosition = new Vector2(.5f, -.5f);
+        this.sequenceTooltip.sortingLayerName = "tooltip";
 
         var tgo = new GameObject("seqttt");
         this.text = tgo.AddComponent<TextMeshPro>();
@@ -45,7 +46,10 @@ public class MovementBehav : MonoBehaviour
         this.text.rectTransform.sizeDelta = new Vector2(2, 1);
         this.text.fontSize = 5;
         this.text.alignment = TextAlignmentOptions.Midline;
+        this.text.sortingLayerID = SortingLayer.NameToID("tooltip");
 
+        var hov = this.gameObject.AddComponent<Hoverable>();
+        hov.init(this.GetComponent<BoxCollider2D>(), this.GetComponent<SpriteRenderer>().sprite, behav.ToString());
 
 
         player = FindObjectOfType<playerMovement>();
