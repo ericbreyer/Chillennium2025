@@ -26,6 +26,14 @@ public class DialogueuwManager : MonoBehaviour
         c.gameObject.SetActive(false);
     }
 
+    public void ChangeYapper(Sprite i) {
+        yapper.overrideSprite = i;
+    }
+
+    public bool Done() {
+        return to_yap == "" && yapqueue.Count == 0;
+    }
+
     // Update is called once per frame
     void Update()
     {
