@@ -12,8 +12,53 @@ public class MeshFOV : MonoBehaviour
     [HideInInspector] public int[] triangles;
     [HideInInspector] public int stepCount;
     Vector3[] vertices;
+
+    [Header("Debug Options")]
+    public Color fovColor = new Color(0f, 1f, 0f, 0.25f); // Semi-transparent green
+
+    private Mesh CreateTriangleMesh(Vector3 leftB, Vector3 rightB)
+    {
+        mesh = new Mesh();
+
+        Vector3[] vertices = new Vector3[3]
+        {
+            transform.position,
+            transform.position + leftB, 
+            transform.position + rightB,
+        };
+
+        for (int i = 0; i < 3; i++)
+        {
+            vertices[i] = transform.InverseTransformPoint(vertices[i]);
+        }
+
+        int[] triangles = new int[3]
+        { 0, 1, 2,};
+
+        mesh.Clear();
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.RecalculateNormals();
+        return mesh;
+    }
     
     
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = fovColor;
+
+        // Draw FOV as a filled triangle in the Scene view
+        Vector3 leftBoundary = fov.DirFromAngle(-fov.viewAngle / 2, true) * fov.viewRadius;
+        Vector3 rightBoundary = fov.DirFromAngle(fov.viewAngle / 2, true) * fov.viewRadius;
+
+        Gizmos.DrawLine(transform.position, transform.position + leftBoundary);
+        Gizmos.DrawLine(transform.position, transform.position + rightBoundary);
+
+        // Draw triangle-like FOV area
+        Gizmos.DrawMesh(CreateTriangleMesh(leftBoundary, rightBoundary));
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
