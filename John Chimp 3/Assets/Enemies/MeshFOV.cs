@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class MeshFOV : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class MeshFOV : MonoBehaviour
     [HideInInspector] public int[] triangles;
     [HideInInspector] public int stepCount;
     Vector3[] vertices;
+
+    MeshRenderer meshRenderer;
+    Color fovDefaultColor = new Color(0.5f, 0, 0, 0.5f);
+    Color fovSpottedColor = new Color(1, 0, 0, 0.5f);
 
     [Header("Debug Options")]
     public Color fovColor = new Color(0f, 1f, 0f, 0.25f); // Semi-transparent green
@@ -47,9 +52,13 @@ public class MeshFOV : MonoBehaviour
     {
         Gizmos.color = fovColor;
 
+        float sign = transform.parent.localScale.x / Mathf.Abs(transform.parent.localScale.x);
+
         // Draw FOV as a filled triangle in the Scene view
-        Vector3 leftBoundary = fov.DirFromAngle(-fov.viewAngle / 2, true) * fov.viewRadius;
-        Vector3 rightBoundary = fov.DirFromAngle(fov.viewAngle / 2, true) * fov.viewRadius;
+        Vector3 leftBoundary = fov.DirFromAngle(-fov.viewAngle / 2, true) * fov.viewRadius * sign;
+        Vector3 rightBoundary = fov.DirFromAngle(fov.viewAngle / 2, true) * fov.viewRadius * sign;
+
+        
 
         Gizmos.DrawLine(transform.position, transform.position + leftBoundary);
         Gizmos.DrawLine(transform.position, transform.position + rightBoundary);
@@ -64,10 +73,20 @@ public class MeshFOV : MonoBehaviour
     {
         mesh = GetComponent<MeshFilter>().mesh;
         fov = GetComponent<FOV>();
+        meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer.material.color = fovDefaultColor;
+
     }
 
     void MakeMesh()
     {
+        Color MeshColor = fovDefaultColor;
+        if (fov.visible)
+        {
+            MeshColor = fovSpottedColor;
+        }
+        
+        
         stepCount = Mathf.RoundToInt(fov.viewAngle * meshRes);
         float stepAngle = fov.viewAngle / stepCount;
 
@@ -78,8 +97,8 @@ public class MeshFOV : MonoBehaviour
 
         for (int s = 0; s <= stepCount; s++)
         {
-            float angle = fov.transform.eulerAngles.y - fov.viewAngle / 2 + stepAngle * s;
-            Vector3 dir = fov.DirFromAngle(angle, false);
+            float angle = fov.transform.eulerAngles.z - fov.viewAngle / 2 + stepAngle * s;
+            Vector3 dir = fov.DirFromAngle(angle, true);
 
             hit = Physics2D.Raycast(fov.transform.position, dir, fov.viewRadius, fov.obstacleMask);
 
@@ -96,15 +115,18 @@ public class MeshFOV : MonoBehaviour
         int vertexCount = viewVertices.Count + 1;
 
         vertices = new Vector3[vertexCount];
+        Color[] colors = new Color[vertexCount];
         triangles = new int[(vertexCount - 2) * 3];
 
         //this represents the point at the observer
         vertices[0] = Vector3.zero;
+        colors[0] = MeshColor;
 
         for(int i = 0; i < vertexCount - 1; i++)
         {
-            vertices[i + 1] = transform.InverseTransformPoint(viewVertices[i]);
 
+            vertices[i + 1] = transform.InverseTransformPoint(viewVertices[i]);
+            colors[i + 1] = MeshColor;
             //this represents the indices into viewVertices
             if(i < vertexCount - 2)
             {
@@ -117,8 +139,10 @@ public class MeshFOV : MonoBehaviour
 
         mesh.Clear();
         mesh.vertices = vertices;
+        mesh.SetColors(colors);
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
+        
 
     }
 
@@ -127,5 +151,13 @@ public class MeshFOV : MonoBehaviour
     void Update()
     {
         MakeMesh();
+        if (fov.visible)
+        {
+            meshRenderer.material.color = fovSpottedColor;
+        }
+        else
+        {
+            meshRenderer.material.color = fovDefaultColor;
+        }
     }
 }

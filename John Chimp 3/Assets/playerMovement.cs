@@ -213,27 +213,7 @@ public class playerMovement : MonoBehaviour
         Vector2 anchorPoint = curMovement.movPoint.transform.position;
         Vector2 checkPoint = anchorPoint + Vector2.down * 1.01f;
 
-        RaycastHit2D hit = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.49f * facingDir, 1f), checkPoint+ new Vector2(0.49f * facingDir, 1f), groundMask);
-        RaycastHit2D hit2 = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.49f * facingDir, -1f), checkPoint+ new Vector2(0.49f * facingDir, -1f), groundMask);
-        RaycastHit2D hit3 = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y) + new Vector2(-0.49f * facingDir, -1f), checkPoint+ new Vector2(-0.49f * facingDir, -1f), groundMask);
-        Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.5f * facingDir, 1f), checkPoint+ new Vector2(0.49f * facingDir, 1f), Color.red);
-        Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.5f * facingDir, -1f), checkPoint+ new Vector2(0.49f * facingDir, -1f), Color.red);
-        Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(-0.5f * facingDir, -1f), checkPoint+ new Vector2(-0.49f * facingDir, -1f), Color.red);
-
-        if (hit.collider != null)
-        {
-            //Debug.Log(hit.collider.name);
-        }
-        if (hit2.collider != null)
-        {
-            //Debug.Log(hit2.collider.name);
-        }
-        if (hit3.collider != null)
-        {
-            ///Debug.Log(hit3.collider.name);
-        }
-
-        if (hit.collider == null && hit2.collider == null && hit3.collider == null)
+        if (bigCheck())
         {
             roped = true;
             //Debug.Log("we ropin");
@@ -281,13 +261,7 @@ public class playerMovement : MonoBehaviour
         {
             jank = 0;
             checkPoint = anchorPoint - Vector2.right * curMovement.facingDir * swingRadius;
-            RaycastHit2D hit = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.49f * facingDir, 1f), checkPoint+ new Vector2(0.49f * facingDir, 1f), groundMask);
-            RaycastHit2D hit2 = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.49f * facingDir, -1f), checkPoint+ new Vector2(0.49f * facingDir, -1f), groundMask);
-            RaycastHit2D hit3 = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y) + new Vector2(-0.49f * facingDir, -1f), checkPoint+ new Vector2(-0.49f * facingDir, -1f), groundMask);
-            Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.5f * facingDir, 1f), checkPoint+ new Vector2(0.49f * facingDir, 1f), Color.red);
-            Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.5f * facingDir, -1f), checkPoint+ new Vector2(0.49f * facingDir, -1f), Color.red);
-            Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(-0.5f * facingDir, -1f), checkPoint+ new Vector2(-0.49f * facingDir, -1f), Color.red);
-            if (hit.collider == null && hit2.collider == null && hit3.collider == null)
+            if (bigCheck())
             {
                 roped = true;
                 initialDir = checkPoint.x - transform.position.x < 0 ? -1 : 1;
@@ -301,13 +275,7 @@ public class playerMovement : MonoBehaviour
             else
             {
                 checkPoint = anchorPoint - Vector2.up * swingRadius;
-                hit = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.49f * facingDir, 1f), checkPoint+ new Vector2(0.49f * facingDir, 1f), groundMask);
-                hit2 = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.49f * facingDir, -1f), checkPoint+ new Vector2(0.49f * facingDir, -1f), groundMask);
-                hit3 = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y) + new Vector2(-0.49f * facingDir, -1f), checkPoint+ new Vector2(-0.49f * facingDir, -1f), groundMask);
-                Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.5f * facingDir, 1f), checkPoint+ new Vector2(0.49f * facingDir, 1f), Color.red);
-                Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.5f * facingDir, -1f), checkPoint+ new Vector2(0.49f * facingDir, -1f), Color.red);
-                Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(-0.5f * facingDir, -1f), checkPoint+ new Vector2(-0.49f * facingDir, -1f), Color.red);
-                if (hit.collider == null && hit2.collider == null && hit3.collider == null)
+                if (bigCheck())
                 {
                     roped = true;
                     initialDir = checkPoint.x - transform.position.x < 0 ? -1 : 1;
@@ -388,6 +356,20 @@ public class playerMovement : MonoBehaviour
             rb.gravityScale = 1;
         }
     }
+
+    bool bigCheck()
+    {
+        RaycastHit2D hit = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.49f * facingDir, 1f), checkPoint+ new Vector2(0.49f * facingDir, 1f), groundMask);
+        RaycastHit2D hit2 = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.49f * facingDir, -1f), checkPoint+ new Vector2(0.49f * facingDir, -1f), groundMask);
+        RaycastHit2D hit3 = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y) + new Vector2(-0.49f * facingDir, -1f), checkPoint+ new Vector2(-0.49f * facingDir, -1f), groundMask);
+        RaycastHit2D hit4 = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y), checkPoint, groundMask);
+        Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.5f * facingDir, 1f), checkPoint+ new Vector2(0.49f * facingDir, 1f), Color.red);
+        Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.5f * facingDir, -1f), checkPoint+ new Vector2(0.49f * facingDir, -1f), Color.red);
+        Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(-0.5f * facingDir, -1f), checkPoint+ new Vector2(-0.49f * facingDir, -1f), Color.red);
+        Debug.DrawLine(new Vector2(transform.position.x, transform.position.y), checkPoint);
+
+        return (hit.collider == null && hit2.collider == null && hit3.collider == null);
+    }
     void move()
     {
         
@@ -399,6 +381,7 @@ public class playerMovement : MonoBehaviour
         }
         else
         {
+            Debug.Log("cond not met");
             rb.velocity = new Vector2((target_x - gameObject.transform.position.x > 0 ? walkSpeed : -1 * walkSpeed), rb.velocity.y);
         }
         

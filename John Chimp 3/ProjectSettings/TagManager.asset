@@ -18,7 +18,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - blockRay
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: John
+    uniqueID: 2562624513
     locked: 0
   - name: tooltip
     uniqueID: 1161560345
