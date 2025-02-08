@@ -41,16 +41,6 @@ public class MusicManager : MonoBehaviour
 
     private int planSeed1, planSeed2, actionSeed1, actionSeed2, deathSeed1, deathSeed2;
 
-    void Awake() {
-        var objs = GameObject.FindObjectsOfType<MusicManager>();
-
-        if (objs.Length > 1) {
-            Destroy(this.gameObject);
-        }
-
-        DontDestroyOnLoad(this.gameObject);
-    }
-
     private
     // Start is called before the first frame update
     void Start()
@@ -99,13 +89,6 @@ public class MusicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            
-            StartCoroutine(musicDie());
-            dead = true;
-            return;
-        }
         if(act2target)
         {
             act2 = Mathf.Min((1/loopFadeTime)* Time.deltaTime + act2, 1f);
@@ -186,7 +169,7 @@ public class MusicManager : MonoBehaviour
         {
             bool oldtarg = plan2target;
             plan2target = !plan2target;
-            Debug.Log("Changing from " + oldtarg +  " to "  + plan2target);
+            //Debug.Log("Changing from " + oldtarg +  " to "  + plan2target);
             if(plan2target)
             {
                 planSource2.time = 4f;
@@ -202,13 +185,12 @@ public class MusicManager : MonoBehaviour
         laststartBool = (pm.startBool == 1);
     }
 
-    IEnumerator musicDie()
+    public void musicDie()
     {
         deadSource.volume = 1f;
         deadSource.time = 0;
         deadSource.Play();
-        yield return new WaitForSeconds(.5f);
-        FindObjectOfType<GamerManager>().Respawn();
+        dead = true;
     }
 
 }

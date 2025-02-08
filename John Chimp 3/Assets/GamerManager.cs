@@ -38,6 +38,10 @@ public class GamerManager : MonoBehaviour
     }
 
     private IEnumerator FadeCoroutine(Action a) {
+        FindObjectOfType<playerMovement>().die();
+        yield return new WaitForSeconds(3);
+        
+
         float SPEEEEEEEEÈD = .005f;
         for(float i = 0; i < 1; i += SPEEEEEEEEÈD) {
             bigFadeBoi.color = new Color(bigFadeBoi.color.r, bigFadeBoi.color.g, bigFadeBoi.color.b, i);
@@ -62,6 +66,15 @@ public class GamerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.D)) {
+
+            die();
+            return;
+        }
+    }
+
+    public void die() {
+        FindObjectOfType<MusicManager>().musicDie();
+        Respawn();
     }
 }
