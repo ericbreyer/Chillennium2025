@@ -17,6 +17,7 @@ public class FOV : MonoBehaviour
     public GameObject gun;
 
 
+
     public Vector2 DirFromAngle(float angleDeg, bool global)
     {
         if(!global)
@@ -29,7 +30,7 @@ public class FOV : MonoBehaviour
 
     void FindVisiblePlayers()
     {
-        playersInRange = Physics2D.OverlapCircleAll(transform.position, viewRadius);
+        playersInRange = Physics2D.OverlapCircleAll(transform.position, viewRadius, playerMask);
 
         visible = false;
 
@@ -49,10 +50,18 @@ public class FOV : MonoBehaviour
                 {
                     if (!Physics2D.Raycast(transform.position, dirToTarget, distance, obstacleMask))
                     {
-                        Debug.Log("")
+                        Debug.Log("Seen");
                         visible = true;
 
                     }
+                    else
+                    {
+                        Debug.Log("Occluded");
+                    }
+                }
+                else
+                {
+                    Debug.Log("Not Seen");
                 }
             }
         }
@@ -68,16 +77,42 @@ public class FOV : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(gun)
+        //if(gun)
+        //{
+        //    float angle = Vector3.SignedAngle(gun.transform.right, dirToTarget, Vector3.forward);
+        //    gun.transform.Rotate(0, 0, angle);
+        //}
+        FindVisiblePlayers();
+        if (visible)
         {
-            float angle = Vector3.SignedAngle(gun.transform.right, dirToTarget, Vector3.forward);
-            gun.transform.Rotate(0, 0, angle);
+            Transform pappa_transform = transform.parent;
+            float pappa_transform_scale = (pappa_transform.localScale.x > 0) ? 1 : -1;
+            float angle = Vector3.SignedAngle(transform.right.normalized, dirToTarget.normalized, Vector3.forward);
+            transform.Rotate(0, 0, angle);
+            
         }
+        
+        
+
+        //float end_angle = transform.localEulerAngles.z;
+
+        
+        //if (end_angle > 90 && end_angle < 180)
+        //{
+        //    end_angle = 180 - end_angle;
+        //    Vector3 temp = pappa_transform.localScale;
+        //    pappa_transform.localScale = new Vector3(-1 * temp.x, temp.y, temp.z);
+        //    transform.localEulerAngles = new Vector3(0, 0, end_angle);
+
+        //}
+
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        FindVisiblePlayers();
+        
     }
 }

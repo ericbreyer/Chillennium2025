@@ -18,8 +18,10 @@ public class GuardScript : Enemy
 
     public override void SpottedBehavior()
     {
+        Debug.Log("Shoot");
         gun.shoot();
     }
+
 
     // Update is called once per frame
     void Update()

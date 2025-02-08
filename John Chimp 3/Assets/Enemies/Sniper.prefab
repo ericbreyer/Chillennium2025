@@ -95,7 +95,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1176142266140005332}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -227,6 +227,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5014a613c99e884a92a47695624e3f7, type: 3}
+--- !u!1 &440466741332172746 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8402396615701235598, guid: e5014a613c99e884a92a47695624e3f7, type: 3}
+  m_PrefabInstance: {fileID: 8252728800956864580}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8900565181272872013
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -234,6 +239,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6461479272400511680}
     m_Modifications:
+    - target: {fileID: -9105028657231382399, guid: a34251df14d9afe4287eed4bddf27fd9, type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 440466741332172746}
     - target: {fileID: 3483335852582775164, guid: a34251df14d9afe4287eed4bddf27fd9, type: 3}
       propertyPath: m_Name
       value: FOVPrefab

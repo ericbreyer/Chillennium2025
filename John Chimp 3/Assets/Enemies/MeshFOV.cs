@@ -93,7 +93,7 @@ public class MeshFOV : MonoBehaviour
 
         for (int s = 0; s <= stepCount; s++)
         {
-            float angle = fov.transform.eulerAngles.y - fov.viewAngle / 2 + stepAngle * s;
+            float angle = fov.transform.eulerAngles.z - fov.viewAngle / 2 + stepAngle * s;
             Vector3 dir = fov.DirFromAngle(angle, false);
 
             hit = Physics2D.Raycast(fov.transform.position, dir, fov.viewRadius, fov.obstacleMask);

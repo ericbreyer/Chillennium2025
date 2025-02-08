@@ -15,9 +15,9 @@ public class Gun : MonoBehaviour
     {
         if (timeSinceShot > shootGapSec)
         {
-            GameObject newBullet = Instantiate(bulletPrefab, transform);
+            GameObject newBullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
             newBullet.GetComponent<Rigidbody2D>().velocity = bulletSpeed * transform.right;
-
+    
             timeSinceShot = 0;
 
         }
