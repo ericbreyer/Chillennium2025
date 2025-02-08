@@ -54,6 +54,7 @@ public class Hoverable : MonoBehaviour
         //t.enableWordWrapping = true;
         t.rectTransform.pivot = new Vector2(.5f, 0);
         t.fontSize = 3;
+        t.sortingOrder = 1;
 
         tbg.transform.localPosition = new Vector3(0, .5f, -.1f);
         tbg.rectTransform.sizeDelta = new Vector2(2, 10);

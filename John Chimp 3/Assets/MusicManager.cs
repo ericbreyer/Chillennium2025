@@ -99,13 +99,6 @@ public class MusicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            musicDie();
-            StartCoroutine(Respawn());
-            dead = true;
-            return;
-        }
         if(act2target)
         {
             act2 = Mathf.Min((1/loopFadeTime)* Time.deltaTime + act2, 1f);
@@ -202,17 +195,12 @@ public class MusicManager : MonoBehaviour
         laststartBool = (pm.startBool == 1);
     }
 
-    void musicDie()
+    public void musicDie()
     {
         deadSource.volume = 1f;
         deadSource.time = 0;
         deadSource.Play();
+        dead = true;
     }
 
-    private IEnumerator Respawn()
-    {
-        yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Start();
-    }
 }

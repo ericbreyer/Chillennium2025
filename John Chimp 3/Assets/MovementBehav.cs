@@ -35,8 +35,8 @@ public class MovementBehav : MonoBehaviour
         this.sequenceTooltip = go.AddComponent<SpriteRenderer>();
         this.sequenceTooltip.sprite = circle;
         this.sequenceTooltip.color = Color.red;
-        this.sequenceTooltip.transform.parent = this.transform;
-        this.sequenceTooltip.transform.localPosition = new Vector2(.5f, -.5f);
+        this.sequenceTooltip.transform.parent = this.movPoint.transform;
+        this.sequenceTooltip.transform.localPosition = new Vector2(0, 0);
         this.sequenceTooltip.sortingLayerName = "tooltip";
 
         var tgo = new GameObject("seqttt");

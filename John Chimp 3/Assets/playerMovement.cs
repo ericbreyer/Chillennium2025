@@ -55,11 +55,17 @@ public class playerMovement : MonoBehaviour
         }
         List<Vector3> ps = new List<Vector3>();
 
+        if (startBool == 0) {
+
+
             mlr.positionCount = 1 + movementOrder.Count;
             ps.Add(transform.position);
+        } else {
+            mlr.positionCount = movementOrder.Count;
+        }
     
         foreach(MovementBehav mb in movementOrder) {
-            ps.Add(mb.transform.position);
+            ps.Add(mb.movPoint.transform.position);
         }
         mlr.SetPositions(ps.ToArray());
     }
@@ -72,8 +78,8 @@ public class playerMovement : MonoBehaviour
        rb = GetComponent<Rigidbody2D>();
         mlr = gameObject.AddComponent<LineRenderer>();
         mlr.materials = new Material[] {Graphic.defaultGraphicMaterial};
-        mlr.startWidth = .5f;
-        mlr.endWidth = 0;
+        mlr.startWidth = .1f;
+        mlr.endWidth = .1f;
         mlr.startColor = Color.red;
         mlr.endColor = Color.HSVToRGB(.15f, 1, 1);
         mlr.sortingLayerName = "line";
@@ -113,6 +119,9 @@ public class playerMovement : MonoBehaviour
                 
                 if(move_cnt > 0) {
                     movementOrder.RemoveAt(0);
+                    if (movementOrder.Count == 0) {
+                        return;
+                    }
                 }
                 curMovement = movementOrder[0];
                 move_cnt += 1;
