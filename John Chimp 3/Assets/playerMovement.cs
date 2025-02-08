@@ -12,12 +12,46 @@ public class playerMovement : MonoBehaviour
     public int facingDir;
     private int initialDir;
     private Rigidbody2D rb;
-    public List<MovementBehav> movementOrder;
+    private List<MovementBehav> movementOrder;
     private MovementBehav curMovement;
+
+    private LineRenderer mlr;
+
+
+    public void addToMovementOrder(MovementBehav mb) {
+        movementOrder.Add(mb);
+    }
+
+    public int getPlaceInMovementOrder(MovementBehav mb) {
+        return movementOrder.IndexOf(mb);
+    }
+
+    public void clearMovementOrder() {
+        this.movementOrder.Clear();
+    }
+
+    void drawMovementOrder() {
+        if(movementOrder.Count == 0) {
+            mlr.SetPositions(new Vector3[0]);
+            mlr.positionCount = 0;
+        }
+        List<Vector3> ps = new List<Vector3>();
+        mlr.positionCount = 1 + movementOrder.Count;
+        ps.Add(transform.position);
+        foreach(MovementBehav mb in movementOrder) {
+            ps.Add(mb.transform.position);
+        }
+        mlr.SetPositions(ps.ToArray());
+    }
+
+
+
     // Start is called before the first frame update
     void Start()
     {
        rb = GetComponent<Rigidbody2D>();
+        mlr = gameObject.AddComponent<LineRenderer>();
+        movementOrder = new List<MovementBehav>();
     }
 
     // Update is called once per frame

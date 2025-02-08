@@ -38,6 +38,9 @@ TagManager:
   - testObstacle
   - testPlayer
   m_SortingLayers:
+  - name: hilight
+    uniqueID: 1480970723
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
