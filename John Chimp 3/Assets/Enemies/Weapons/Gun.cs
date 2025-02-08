@@ -11,12 +11,12 @@ public class Gun : MonoBehaviour
 
     public float timeSinceShot = 10000;
 
-    public virtual void shoot()
+    public virtual void shoot(Vector3 direction)
     {
         if (timeSinceShot > shootGapSec)
         {
             GameObject newBullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
-            newBullet.GetComponent<Rigidbody2D>().velocity = bulletSpeed * transform.right;
+            newBullet.GetComponent<Rigidbody2D>().velocity = bulletSpeed * direction;
     
             timeSinceShot = 0;
 

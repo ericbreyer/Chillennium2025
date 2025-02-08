@@ -19,7 +19,7 @@ public class GuardScript : Enemy
     public override void SpottedBehavior()
     {
         Debug.Log("Shoot");
-        gun.shoot();
+        gun.shoot(fov.dirToTarget);
         target_x = fov.targetLocation.x;
         if (!fov.visible)
         {
@@ -35,8 +35,6 @@ public class GuardScript : Enemy
         {
             currentState = State.Idle;
         }
-
-        fov.setRotation(0);
        
         if(fov.visible)
         {

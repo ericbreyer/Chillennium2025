@@ -73,6 +73,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bystander
       objectReference: {fileID: 0}
+    - target: {fileID: 1176142266140005332, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5463538564462476593, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
       propertyPath: m_IsActive
       value: 0

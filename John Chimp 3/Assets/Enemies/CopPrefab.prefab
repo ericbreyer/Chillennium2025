@@ -42,6 +42,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CopPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 1176142266140005332, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6461479272400511680, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
       propertyPath: m_RootOrder
       value: 0

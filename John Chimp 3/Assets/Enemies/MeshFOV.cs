@@ -52,9 +52,13 @@ public class MeshFOV : MonoBehaviour
     {
         Gizmos.color = fovColor;
 
+        float sign = transform.parent.localScale.x / Mathf.Abs(transform.parent.localScale.x);
+
         // Draw FOV as a filled triangle in the Scene view
-        Vector3 leftBoundary = fov.DirFromAngle(-fov.viewAngle / 2, true) * fov.viewRadius;
-        Vector3 rightBoundary = fov.DirFromAngle(fov.viewAngle / 2, true) * fov.viewRadius;
+        Vector3 leftBoundary = fov.DirFromAngle(-fov.viewAngle / 2, true) * fov.viewRadius * sign;
+        Vector3 rightBoundary = fov.DirFromAngle(fov.viewAngle / 2, true) * fov.viewRadius * sign;
+
+        
 
         Gizmos.DrawLine(transform.position, transform.position + leftBoundary);
         Gizmos.DrawLine(transform.position, transform.position + rightBoundary);
