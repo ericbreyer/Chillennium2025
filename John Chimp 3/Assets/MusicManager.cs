@@ -177,7 +177,7 @@ public class MusicManager : MonoBehaviour
         {
             bool oldtarg = plan2target;
             plan2target = !plan2target;
-            Debug.Log("Changing from " + oldtarg +  " to "  + plan2target);
+            //Debug.Log("Changing from " + oldtarg +  " to "  + plan2target);
             if(plan2target)
             {
                 planSource2.time = 4f;

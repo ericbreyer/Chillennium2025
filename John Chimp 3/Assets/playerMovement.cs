@@ -5,12 +5,14 @@ using UnityEngine;
 public class playerMovement : MonoBehaviour
 {
     public float walkSpeed;
+    public float ropeSpeed;
     public LayerMask groundMask;
     public float jumpTime;
     public int startBool = 0;
     private int moving = 0;
     public int facingDir;
     private int initialDir;
+    private bool roped = false;
     private Rigidbody2D rb;
     [SerializeField]
     private List<MovementBehav> movementOrder;
@@ -54,14 +56,17 @@ public class playerMovement : MonoBehaviour
         mlr = gameObject.AddComponent<LineRenderer>();
         movementOrder = new List<MovementBehav>();
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             startBool = 1;
         }
+    }
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        
         if(startBool == 1 & moving == 0) //start a new movement
         {
             if(movementOrder.Count > 0)
@@ -74,11 +79,23 @@ public class playerMovement : MonoBehaviour
                     case movType.move:
                     {
                         float target_x = curMovement.movPoint.transform.position.x;
-                        Debug.Log(target_x);
+                        //Debug.Log(target_x);
                         initialDir = target_x - transform.position.x < 0 ? -1 : 1;
                         facingDir = initialDir;
                         break;
                         
+                    }
+                    case movType.grapple:
+                    {
+                        roped = false;
+                        Vector2 anchorPoint = curMovement.transform.position;
+                        //TODO - make a rope lol
+                        //Instantiate(rope);
+                        //rope.endpoint = curMovement.movPoint.transform.position;
+                        //rope.monkey = this;
+                        initialDir = anchorPoint.x - transform.position.x < 0 ? -1 : 1;
+                        facingDir = initialDir;
+                        break;
                     }
                 }
             }
@@ -94,31 +111,77 @@ public class playerMovement : MonoBehaviour
             {
                 case movType.move:
                 {
-                    float target_x = curMovement.movPoint.transform.position.x;
-                    rb.velocity = new Vector2((target_x - gameObject.transform.position.x > 0 ? walkSpeed : -1 * walkSpeed), rb.velocity.y);
-                    facingDir = rb.velocity.x < 0 ? -1 : 1;
-                    //Debug.Log("Raycast loacation: " + transform.position + " direction: " +  Vector2.right * facingDir + " Length: " + facingDir * walkSpeed * jumpTime);
-                    RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * facingDir , walkSpeed * jumpTime + 0.5f, groundMask);
-                    Debug.DrawRay(transform.position, Vector2.right * facingDir, Color.red , walkSpeed * jumpTime + 0.5f);
-                    if(hit.collider != null)
+                    move();
+                    break;
+                }
+                case movType.grapple:
+                {
+                    Vector2 anchorPoint = curMovement.transform.position;
+                    Vector2 checkPoint = anchorPoint + Vector2.down * 1.01f;
+                    if (!roped)
                     {
-                        Debug.Log("we hit something with ray");
-                        Debug.Log(hit.collider.gameObject.name);   
+                        RaycastHit2D hit = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.49f * facingDir, 1f), anchorPoint, groundMask);
+                        RaycastHit2D hit2 = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.49f * facingDir, -1f), anchorPoint, groundMask);
+                        RaycastHit2D hit3 = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y) + new Vector2(-0.49f * facingDir, -1f), anchorPoint, groundMask);
+                        Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.5f * facingDir, 1f), anchorPoint, Color.red);
+                        Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.5f * facingDir, -1f), anchorPoint, Color.red);
+                        Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(-0.5f * facingDir, -1f), anchorPoint, Color.red);
+                        if(hit.collider != null)
+                        {
+                            Debug.Log(hit.collider.name);
+                        }
+                        if(hit2.collider != null)
+                        {
+                            Debug.Log(hit2.collider.name);
+                        }
+                        if(hit3.collider != null)
+                        {
+                            Debug.Log(hit3.collider.name);
+                        }
+
+                        if(hit.collider == null && hit2.collider == null && hit3.collider == null)
+                        {
+                            roped = true;
+                            Debug.Log("we ropin");
+                            //Instantiate(rope);
+                            //rope.endpoint = curMovement.movPoint.transform.position;
+                            //rope.monkey = this;
+                        }
+                        else
+                        {
+                            move();
+                        }
+
+
                     }
-                    if (hit.collider != null && isGrounded())
+                    if (roped)
                     {
-                       Debug.Log("Jumping");
-                        Collider2D col = hit.collider;
-                        //Debug.Log(col.gameObject.name);
-                        Jump(col.bounds.max.y);
+                        rb.gravityScale = 0;
+                        rb.velocity = (checkPoint - (Vector2)transform.position).normalized * ropeSpeed;
+
                     }
-                    if((transform.position.x - target_x) * initialDir >= 0f)
+                    if((transform.position.x - checkPoint.x) * initialDir >= 0f)
                     {
-                        transform.position = new Vector2(target_x, transform.position.y);
-                        facingDir = curMovement.facingDir == 0 ? facingDir : curMovement.facingDir; //if target is directional, face there
-                        rb.velocity = Vector2.zero;
-                        moving = 0;
+                        if (!roped)
+                        {
+                            Debug.Log("The ropes didnt work lol");
+                            moving = 0;
+                        }
+                        else
+                        {
+                            transform.position = new Vector2(checkPoint.x, checkPoint.y);
+                            facingDir = curMovement.facingDir == 0 ? facingDir : curMovement.facingDir; //if target is directional, face there
+                            rb.velocity = Vector2.zero;
+                            moving = 0;
+                            rb.gravityScale = 1;
+                            roped = false;
+                            
+                        }
                     }
+
+                    
+                    
+
                     break;
                 }
             }
@@ -127,6 +190,35 @@ public class playerMovement : MonoBehaviour
     void Jump(float ypos)
     {
         rb.velocity = new Vector2(rb.velocity.x, CalculateJumpVelocity(ypos - transform.position.y + 1.5f, jumpTime));
+    }
+
+    void move()
+    {
+        float target_x = curMovement.movPoint.transform.position.x;
+        rb.velocity = new Vector2((target_x - gameObject.transform.position.x > 0 ? walkSpeed : -1 * walkSpeed), rb.velocity.y);
+        facingDir = rb.velocity.x < 0 ? -1 : 1;
+        //Debug.Log("Raycast loacation: " + transform.position + " direction: " +  Vector2.right * facingDir + " Length: " + facingDir * walkSpeed * jumpTime);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * facingDir , walkSpeed * jumpTime + 0.5f, groundMask);
+        Debug.DrawRay(transform.position, Vector2.right * facingDir, Color.red , walkSpeed * jumpTime + 0.5f);
+        if(hit.collider != null)
+        {
+            //Debug.Log("we hit something with ray");
+            //Debug.Log(hit.collider.gameObject.name);   
+        }
+        if (hit.collider != null && isGrounded())
+        {
+            //Debug.Log("Jumping");
+            Collider2D col = hit.collider;
+            //Debug.Log(col.gameObject.name);
+            Jump(col.bounds.max.y);
+        }
+        if((transform.position.x - target_x) * initialDir >= 0f)
+        {
+            transform.position = new Vector2(target_x, transform.position.y);
+            facingDir = curMovement.facingDir == 0 ? facingDir : curMovement.facingDir; //if target is directional, face there
+            rb.velocity = Vector2.zero;
+            moving = 0;
+        }
     }
 
     public bool isGrounded()
