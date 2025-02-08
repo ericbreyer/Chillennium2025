@@ -18,15 +18,15 @@ public class Hoverable : MonoBehaviour
     private double showTextStart;
 
     private static int charsPerSec = 50;
-    
 
+    public void init(BoxCollider2D bc, Sprite sp, string tooltip) {
+        this.bc = bc;
+        this.sp = sp;
+        this.tooltip = tooltip;
+        _init();
+    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Assert(bc != null);
-        Debug.Assert(sp != null);
-
+    void _init() { 
         this.hilight = new GameObject("hilight");
         this.hilight.SetActive(false);
         this.hilight.transform.parent = this.gameObject.transform;
