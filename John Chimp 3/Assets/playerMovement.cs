@@ -14,6 +14,7 @@ public class playerMovement : MonoBehaviour
     private int move_cnt = 0;
     public int facingDir;
     private int initialDir;
+    public bool dead = false;
     private Rigidbody2D rb;
     [SerializeField]
     private List<MovementBehav> movementOrder;
@@ -178,5 +179,20 @@ public class playerMovement : MonoBehaviour
         float gravity = - (2*peakHeight/(time * time));
         rb.gravityScale = gravity / Physics2D.gravity.y;
         return (-1 * gravity * time);
+    }
+
+    public void die() {
+        startBool = 0;
+        dead = true;
+        moving = 0;
+        clearMovementOrder();
+        StartCoroutine(die_co());
+    }
+
+    private IEnumerator die_co() {
+        for(int i = 0; i < 10000; i++) {
+            this.transform.Rotate(Vector3.forward, (i/360f) / 2);
+            yield return new WaitForEndOfFrame();
+        }
     }
 }
