@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+using UnityEngine.UI;
 
 public class playerMovement : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class playerMovement : MonoBehaviour
     public float jumpTime;
     public int startBool = 0;
     private int moving = 0;
+    private int move_cnt = 0;
     public int facingDir;
     private int initialDir;
     private Rigidbody2D rb;
@@ -20,11 +23,14 @@ public class playerMovement : MonoBehaviour
 
 
     public void addToMovementOrder(MovementBehav mb) {
-        movementOrder.Add(mb);
+        if(moving == 0 && (movementOrder.Count == 0 || movementOrder[movementOrder.Count - 1] != mb)) {
+            movementOrder.Add(mb);
+        }
+        
     }
 
     public int getPlaceInMovementOrder(MovementBehav mb) {
-        return movementOrder.IndexOf(mb);
+        return movementOrder.LastIndexOf(mb);
     }
 
     public void clearMovementOrder() {
@@ -37,10 +43,18 @@ public class playerMovement : MonoBehaviour
             mlr.positionCount = 0;
         }
         List<Vector3> ps = new List<Vector3>();
-        mlr.positionCount = 1 + movementOrder.Count;
-        ps.Add(transform.position);
+
+        if (startBool == 0) {
+
+
+            mlr.positionCount = 1 + movementOrder.Count;
+            ps.Add(transform.position);
+        } else {
+            mlr.positionCount = movementOrder.Count;
+        }
+    
         foreach(MovementBehav mb in movementOrder) {
-            ps.Add(mb.transform.position);
+            ps.Add(mb.movPoint.transform.position);
         }
         mlr.SetPositions(ps.ToArray());
     }
@@ -52,12 +66,22 @@ public class playerMovement : MonoBehaviour
     {
        rb = GetComponent<Rigidbody2D>();
         mlr = gameObject.AddComponent<LineRenderer>();
+        mlr.materials = new Material[] {Graphic.defaultGraphicMaterial};
+        mlr.startWidth = .1f;
+        mlr.endWidth = .1f;
+        mlr.startColor = Color.red;
+        mlr.endColor = Color.HSVToRGB(.15f, 1, 1);
+        mlr.sortingLayerName = "line";
+
         movementOrder = new List<MovementBehav>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        drawMovementOrder();
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             startBool = 1;
@@ -67,8 +91,11 @@ public class playerMovement : MonoBehaviour
             if(movementOrder.Count > 0)
             {
                 moving = 1;
+                if(move_cnt > 0) {
+                    movementOrder.RemoveAt(0);
+                }
                 curMovement = movementOrder[0];
-                movementOrder.RemoveAt(0);
+                move_cnt += 1;
                 switch (curMovement.behav)
                 {
                     case movType.move:
@@ -86,6 +113,7 @@ public class playerMovement : MonoBehaviour
             {
                 Debug.Log("Done with all movements");
                 startBool = 0;
+                move_cnt = 0;
             }
         }
         if(moving == 1)
