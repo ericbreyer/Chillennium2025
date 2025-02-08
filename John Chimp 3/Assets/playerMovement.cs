@@ -93,6 +93,9 @@ public class playerMovement : MonoBehaviour
                 moving = 1;
                 if(move_cnt > 0) {
                     movementOrder.RemoveAt(0);
+                    if (movementOrder.Count == 0) {
+                        return;
+                    }
                 }
                 curMovement = movementOrder[0];
                 move_cnt += 1;
