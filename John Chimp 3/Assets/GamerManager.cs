@@ -38,6 +38,10 @@ public class GamerManager : MonoBehaviour
     }
 
     private IEnumerator FadeCoroutine(Action a) {
+        FindObjectOfType<playerMovement>().die();
+        yield return new WaitForSeconds(3);
+        
+
         float SPEEEEEEEEÈD = .005f;
         for(float i = 0; i < 1; i += SPEEEEEEEEÈD) {
             bigFadeBoi.color = new Color(bigFadeBoi.color.r, bigFadeBoi.color.g, bigFadeBoi.color.b, i);
@@ -64,9 +68,13 @@ public class GamerManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.D)) {
 
-            FindObjectOfType<MusicManager>().musicDie();
-            Respawn();
+            die();
             return;
         }
+    }
+
+    public void die() {
+        FindObjectOfType<MusicManager>().musicDie();
+        Respawn();
     }
 }

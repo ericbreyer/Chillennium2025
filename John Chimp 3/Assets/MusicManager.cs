@@ -41,16 +41,6 @@ public class MusicManager : MonoBehaviour
 
     private int planSeed1, planSeed2, actionSeed1, actionSeed2, deathSeed1, deathSeed2;
 
-    void Awake() {
-        var objs = GameObject.FindObjectsOfType<MusicManager>();
-
-        if (objs.Length > 1) {
-            Destroy(this.gameObject);
-        }
-
-        DontDestroyOnLoad(this.gameObject);
-    }
-
     private
     // Start is called before the first frame update
     void Start()
