@@ -45,7 +45,7 @@ public class CopScript : Enemy
 
     public override void SpottedBehavior()
     {
-        gun.shoot();
+        //gun.shoot();
         if(!fov.visible)
         {
             currentState = State.Idle;
