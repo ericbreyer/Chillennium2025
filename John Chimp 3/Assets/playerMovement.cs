@@ -7,7 +7,7 @@ public class playerMovement : MonoBehaviour
     public float walkSpeed;
     public LayerMask groundMask;
     public float jumpTime;
-    private int startBool = 0;
+    public int startBool = 0;
     private int moving = 0;
     public int facingDir;
     private int initialDir;
@@ -85,6 +85,7 @@ public class playerMovement : MonoBehaviour
             else
             {
                 Debug.Log("Done with all movements");
+                startBool = 0;
             }
         }
         if(moving == 1)
