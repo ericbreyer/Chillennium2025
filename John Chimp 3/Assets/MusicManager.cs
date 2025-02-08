@@ -101,8 +101,8 @@ public class MusicManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.D))
         {
-            musicDie();
-            StartCoroutine(Respawn());
+            
+            StartCoroutine(musicDie());
             dead = true;
             return;
         }
@@ -202,17 +202,13 @@ public class MusicManager : MonoBehaviour
         laststartBool = (pm.startBool == 1);
     }
 
-    void musicDie()
+    IEnumerator musicDie()
     {
         deadSource.volume = 1f;
         deadSource.time = 0;
         deadSource.Play();
+        yield return new WaitForSeconds(.5f);
+        FindObjectOfType<GamerManager>().Respawn();
     }
 
-    private IEnumerator Respawn()
-    {
-        yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Start();
-    }
 }
