@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class playerMovement : MonoBehaviour
 {
     public float walkSpeed;
+    public BoxCollider2D bc;
     [SerializeField]
     private float curAngle;
     public float ropeSpeed;
@@ -118,11 +119,14 @@ public class playerMovement : MonoBehaviour
                 swinging = false;
                 
                 if(move_cnt > 0) {
+                    Debug.Log("removing move");
                     movementOrder.RemoveAt(0);
                     if (movementOrder.Count == 0) {
+                        moving = 0;
                         return;
                     }
                 }
+                Debug.Log("Continuing on with update");
                 curMovement = movementOrder[0];
                 move_cnt += 1;
                 switch (curMovement.behav)
@@ -217,27 +221,28 @@ public class playerMovement : MonoBehaviour
 
         if (hit.collider != null)
         {
-            Debug.Log(hit.collider.name);
+            //Debug.Log(hit.collider.name);
         }
         if (hit2.collider != null)
         {
-            Debug.Log(hit2.collider.name);
+            //Debug.Log(hit2.collider.name);
         }
         if (hit3.collider != null)
         {
-            Debug.Log(hit3.collider.name);
+            ///Debug.Log(hit3.collider.name);
         }
 
         if (hit.collider == null && hit2.collider == null && hit3.collider == null)
         {
             roped = true;
-            Debug.Log("we ropin");
+            //Debug.Log("we ropin");
             //Instantiate(rope);
             //rope.endpoint = curMovement.movPoint.transform.position;
             //rope.monkey = this;
         }
         else
         {
+            Debug.Log("moving to grapple");
             move();
         }
         if (roped)
@@ -250,7 +255,7 @@ public class playerMovement : MonoBehaviour
         {
             if (!roped)
             {
-                Debug.Log("The ropes didnt work lol");
+                //Debug.Log("The ropes didnt work lol");
                 moving = 0;
             }
             else
@@ -285,7 +290,7 @@ public class playerMovement : MonoBehaviour
             {
                 roped = true;
                 initialDir = checkPoint.x - transform.position.x < 0 ? -1 : 1;
-                Debug.Log("we ropin, side check");
+//Debug.Log("we ropin, side check");
                 jank = (curMovement.facingDir == 1) ? 0 : 1;
                 //Instantiate(rope);
                 //rope.endpoint = curMovement.movPoint.transform.position;
@@ -306,13 +311,14 @@ public class playerMovement : MonoBehaviour
                     roped = true;
                     initialDir = checkPoint.x - transform.position.x < 0 ? -1 : 1;
                     jank = (curMovement.facingDir == 1) ? 2 : 3;
-                    Debug.Log("we ropin, bottom check");
+                    //Debug.Log("we ropin, bottom check");
                     //Instantiate(rope);
                     //rope.endpoint = curMovement.movPoint.transform.position;
                     //rope.monkey = this;
                 }
                 else
                 {
+                    Debug.Log("moving to grapple");
                     move();
                 }
                 
@@ -337,7 +343,7 @@ public class playerMovement : MonoBehaviour
                 transform.position = new Vector2(checkPoint.x, checkPoint.y);
                 facingDir = curMovement.facingDir == 0 ? facingDir : curMovement.facingDir; //if target is directional, face there
                 rb.velocity = Vector2.zero;
-                Debug.Log("we swinging now");
+                //Debug.Log("we swinging now");
                 swinging = true;
                 curAngle = Mathf.Atan2(((Vector2)transform.position - anchorPoint).x, ((Vector2)transform.position - anchorPoint).y) * Mathf.Rad2Deg % 360f;
                 if(jank == 0)
@@ -350,7 +356,7 @@ public class playerMovement : MonoBehaviour
                 }
                 else if (jank == 2)
                 {
-                    curAngle += -90;
+                    curAngle += 90;
                 }
                 else if (jank == 3)
                 {
@@ -383,8 +389,18 @@ public class playerMovement : MonoBehaviour
     }
     void move()
     {
+        
         float target_x = curMovement.movPoint.transform.position.x;
-        rb.velocity = new Vector2((target_x - gameObject.transform.position.x > 0 ? walkSpeed : -1 * walkSpeed), rb.velocity.y);
+        if (curMovement.movPoint.transform.position.y < bc.bounds.max.y && transform.position.y > bc.bounds.max.y && (isGrounded() || rb.velocity.y > -0.5) && curMovement.movPoint.transform.position.x - 0.51f< bc.bounds.max.x && curMovement.movPoint.transform.position.x + 0.51f> bc.bounds.min.x)
+        {
+            Debug.Log("cond met");
+            rb.velocity = new Vector2((target_x - gameObject.transform.position.x > 0 ? -1 * walkSpeed : 1 * walkSpeed), rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2((target_x - gameObject.transform.position.x > 0 ? walkSpeed : -1 * walkSpeed), rb.velocity.y);
+        }
+        
         facingDir = rb.velocity.x < 0 ? -1 : 1;
         //Debug.Log("Raycast loacation: " + transform.position + " direction: " +  Vector2.right * facingDir + " Length: " + facingDir * walkSpeed * jumpTime);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * facingDir , walkSpeed * jumpTime + 0.5f, groundMask);

@@ -1873,7 +1873,7 @@ Transform:
   m_Children:
   - {fileID: 1255893994}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2144319114
 GameObject:
@@ -2045,11 +2045,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5530602637230221746, guid: f6c9dfd28e40a7147a0e06c0cfebe257, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.01
+      value: -5.51
       objectReference: {fileID: 0}
     - target: {fileID: 5530602637230221746, guid: f6c9dfd28e40a7147a0e06c0cfebe257, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.94
+      value: -2.76
       objectReference: {fileID: 0}
     - target: {fileID: 5530602637230221746, guid: f6c9dfd28e40a7147a0e06c0cfebe257, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2088,12 +2088,16 @@ PrefabInstance:
       value: Monky
       objectReference: {fileID: 0}
     - target: {fileID: 5530602637230221774, guid: f6c9dfd28e40a7147a0e06c0cfebe257, type: 3}
+      propertyPath: topY
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530602637230221774, guid: f6c9dfd28e40a7147a0e06c0cfebe257, type: 3}
       propertyPath: ropeSpeed
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5530602637230221774, guid: f6c9dfd28e40a7147a0e06c0cfebe257, type: 3}
       propertyPath: swingRadius
-      value: 1.6
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5530602637230221774, guid: f6c9dfd28e40a7147a0e06c0cfebe257, type: 3}
       propertyPath: swingAngularSpeed
