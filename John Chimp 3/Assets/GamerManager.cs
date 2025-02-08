@@ -55,7 +55,8 @@ public class GamerManager : MonoBehaviour
     {
         bigFadeBoi = GetComponent<SpriteRenderer>();
         bigFadeBoi.color = new Color(bigFadeBoi.color.r, bigFadeBoi.color.g, bigFadeBoi.color.b, 0);
-
+        FindObjectOfType<DialogueuwManager>().QueueDialogue("Yo Mista White");
+        FindObjectOfType<DialogueuwManager>().QueueDialogue("aoughapinowrblnwoibhwoibhnwoerinb");
     }
 
     // Update is called once per frame
