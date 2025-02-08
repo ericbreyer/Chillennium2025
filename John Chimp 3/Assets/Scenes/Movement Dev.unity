@@ -578,6 +578,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeInTime: 0.2
   loopFadeTime: 0.4
+  act2target: 0
+  plan2target: 0
+  plan2: 0
   fadeOutTime: 1
   pm: {fileID: 1158437566}
   planning:
@@ -1525,6 +1528,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5530602637230221744, guid: f6c9dfd28e40a7147a0e06c0cfebe257, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.9583333
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530602637230221744, guid: f6c9dfd28e40a7147a0e06c0cfebe257, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.9166666
+      objectReference: {fileID: 0}
     - target: {fileID: 5530602637230221746, guid: f6c9dfd28e40a7147a0e06c0cfebe257, type: 3}
       propertyPath: m_RootOrder
       value: 2

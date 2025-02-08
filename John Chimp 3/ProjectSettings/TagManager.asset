@@ -47,3 +47,6 @@ TagManager:
   - name: tooltip
     uniqueID: 1161560345
     locked: 0
+  - name: line
+    uniqueID: 1991900299
+    locked: 0

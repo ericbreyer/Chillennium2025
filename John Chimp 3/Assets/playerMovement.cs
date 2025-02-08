@@ -23,7 +23,7 @@ public class playerMovement : MonoBehaviour
 
 
     public void addToMovementOrder(MovementBehav mb) {
-        if(movementOrder.Count == 0 || movementOrder[movementOrder.Count - 1] != mb) {
+        if(moving == 0 && (movementOrder.Count == 0 || movementOrder[movementOrder.Count - 1] != mb)) {
             movementOrder.Add(mb);
         }
         
@@ -44,13 +44,8 @@ public class playerMovement : MonoBehaviour
         }
         List<Vector3> ps = new List<Vector3>();
 
-        //if (startBool > 0) {
-        //    mlr.positionCount = movementOrder.Count;
-        //}
-        //else {
             mlr.positionCount = 1 + movementOrder.Count;
             ps.Add(transform.position);
-        //}
     
         foreach(MovementBehav mb in movementOrder) {
             ps.Add(mb.transform.position);
