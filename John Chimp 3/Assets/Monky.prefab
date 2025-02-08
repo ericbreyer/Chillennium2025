@@ -232,11 +232,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb42aa090fbfeb41811f63609a7bc2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 4
+  walkSpeed: 5
+  curAngle: 0
+  ropeSpeed: 10
+  ropeSpeed2: 24
+  swingAngularSpeed: 720
+  swingRadius: 1.5
   groundMask:
     serializedVersion: 2
     m_Bits: 1
-  jumpTime: 0.25
+  jumpTime: 0.2
   startBool: 0
   facingDir: 0
   dead: 0
