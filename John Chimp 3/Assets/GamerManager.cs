@@ -7,10 +7,10 @@ using UnityEngine.SceneManagement;
 public class GamerManager : MonoBehaviour
 {
 
-    public Scene[] scenes;
+    [SerializeField]
+    private int[] sceneBuildIdxsForLevels;
     private int curScene = 0;
     private SpriteRenderer bigFadeBoi;
-    private float fadeNum = 0;
 
     void Awake() {
         var objs = GameObject.FindObjectsOfType<GamerManager>();
@@ -29,8 +29,16 @@ public class GamerManager : MonoBehaviour
         ));
     }
 
+    public void NextScene() {
+        StartCoroutine(FadeCoroutine(() => {
+            curScene += 1;
+            SceneManager.LoadScene(sceneBuildIdxsForLevels[curScene]);
+            }
+        ));
+    }
+
     private IEnumerator FadeCoroutine(Action a) {
-        float SPEEEEEEEEÈD = .01f;
+        float SPEEEEEEEEÈD = .005f;
         for(float i = 0; i < 1; i += SPEEEEEEEEÈD) {
             bigFadeBoi.color = new Color(bigFadeBoi.color.r, bigFadeBoi.color.g, bigFadeBoi.color.b, i);
             yield return null;
