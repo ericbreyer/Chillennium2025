@@ -12,6 +12,7 @@ public class playerMovement : MonoBehaviour
     public int facingDir;
     private int initialDir;
     private Rigidbody2D rb;
+    [SerializeField]
     private List<MovementBehav> movementOrder;
     private MovementBehav curMovement;
 
@@ -124,7 +125,7 @@ public class playerMovement : MonoBehaviour
     }
     void Jump(float ypos)
     {
-        rb.velocity = new Vector2(rb.velocity.x, CalculateJumpVelocity(Physics2D.gravity.y, ypos - transform.position.y + 1.1f, jumpTime));
+        rb.velocity = new Vector2(rb.velocity.x, CalculateJumpVelocity(ypos - transform.position.y + 1.5f, jumpTime));
     }
 
     public bool isGrounded()
@@ -140,8 +141,10 @@ public class playerMovement : MonoBehaviour
     return hit != null;
 }
 
-    public float CalculateJumpVelocity(float gravity, float peakHeight, float time)
+    public float CalculateJumpVelocity(float peakHeight, float time)
     {
-        return (peakHeight / time) - (gravity * time / 2);
+        float gravity = - (2*peakHeight/(time * time));
+        rb.gravityScale = gravity / Physics2D.gravity.y;
+        return (-1 * gravity * time);
     }
 }
