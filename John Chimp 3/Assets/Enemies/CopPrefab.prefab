@@ -38,6 +38,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 440466741332172756, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 440466741332172756, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1176142266140005332, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
       propertyPath: m_Name
       value: CopPrefab

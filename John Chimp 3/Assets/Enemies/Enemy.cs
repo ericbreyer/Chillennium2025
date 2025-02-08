@@ -121,7 +121,7 @@ public class Enemy : MonoBehaviour
 
     public bool moveToTarget(float x)
     {
-        rb.velocity = new Vector2((target_x - gameObject.transform.position.x > 0 ? walkSpeed : -1 * walkSpeed), rb.velocity.y);
+        rb.velocity = new Vector2((x - gameObject.transform.position.x > 0 ? walkSpeed : -1 * walkSpeed), rb.velocity.y);
         facingDir = rb.velocity.x < 0 ? -1 : 1;
         //Debug.Log("Raycast loacation: " + transform.position + " direction: " +  Vector2.right * facingDir + " Length: " + facingDir * walkSpeed * jumpTime);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * facingDir, walkSpeed * jumpTime + 0.5f, groundMask);
@@ -143,7 +143,7 @@ public class Enemy : MonoBehaviour
         {
             currentState = State.Spotted;
         }
-        if (Mathf.Abs(transform.position.x - target_x) < 0.2)
+        if (Mathf.Abs(transform.position.x - x) < 0.2)
         {
             return true;
         }
