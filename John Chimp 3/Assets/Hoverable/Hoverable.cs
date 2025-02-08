@@ -76,7 +76,6 @@ public class Hoverable : MonoBehaviour
 
     private void Update() {
         var charsToShow = (int)((Time.timeAsDouble - this.showTextStart) * (double)charsPerSec);
-        Debug.Log(charsToShow);
         charsToShow = Mathf.Min(charsToShow, tooltip.Length);
         this.text.text = this.tooltip.Substring(0, charsToShow) ;
         this.textbg.text = "<mark=#000000 padding=\"10, 10, 10, 10\">" + this.tooltip.Substring(0, charsToShow) + "</mark>";
