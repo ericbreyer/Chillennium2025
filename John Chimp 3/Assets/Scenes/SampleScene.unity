@@ -688,6 +688,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 255272643314743345, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 255965986645276227, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -710,7 +714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 440466741332172746, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
       propertyPath: m_Layer
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 440466741332172746, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
       propertyPath: m_IsActive
@@ -740,10 +744,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sniper
       objectReference: {fileID: 0}
-    - target: {fileID: 1176142266140005332, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3867961110789288721, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -758,7 +758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5463538564462476593, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
       propertyPath: m_Layer
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6461479272400511680, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
       propertyPath: m_RootOrder
@@ -807,6 +807,10 @@ PrefabInstance:
     - target: {fileID: 6461479272400511680, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6872336663382451538, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8800412235500514508, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
       propertyPath: viewAngle

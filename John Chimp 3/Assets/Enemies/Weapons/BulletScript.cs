@@ -17,6 +17,14 @@ public class BulletScript : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider other)
+    {
+        if(other.GetComponent<playerMovement>() != null)
+        {
+            other.GetComponent<playerMovement>().die();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
