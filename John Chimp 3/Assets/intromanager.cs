@@ -12,6 +12,7 @@ public class intromanager : MonoBehaviour
     public GameObject scene2;
     public GameObject scene3;
     public SpriteRenderer ftb;
+    public Camera c;
 
     // Start is called before the first frame update
     void Start()
@@ -23,10 +24,11 @@ public class intromanager : MonoBehaviour
     }
 
     IEnumerator timeline() {
+        var sfx = FindObjectOfType<SFXMANGER>();
         scene2.SetActive(false);
         scene3.SetActive(false);
         
-        FindObjectOfType<waggle>().enabled = false;
+        c.GetComponent<waggle>().enabled = false;
         // SCENE 1
 
         var dm = FindObjectOfType<DialogueuwManager>();
@@ -63,13 +65,13 @@ public class intromanager : MonoBehaviour
 
 
         vp.enabled = false;
-        FindObjectOfType<waggle>().enabled = true;
+        c.GetComponent<waggle>().enabled = true;
 
         dm.ChangeYapper(johnchimp);
 
-        dm.QueueDialogue("Oh right my wife died, but at least I got all this money");
-        dm.QueueDialogue("Buy the dip, ride the wave, then dump it all — BOOM, profit!");
-        dm.QueueDialogue("JOHN CHIMP gets it done!!");
+        dm.QueueDialogueWithSound("Oh right my wife died, but at least I got all this money", sfx.MonkeyDialogue());
+        dm.QueueDialogueWithSound("Buy the dip, ride the wave, then dump it all — BOOM, profit!", sfx.MonkeyDialogue());
+        dm.QueueDialogueWithSound("JOHN CHIMP gets it done!!", sfx.MonkeyDialogue());
 
         yield return new WaitWhile(() => !dm.Done());
 
@@ -80,9 +82,9 @@ public class intromanager : MonoBehaviour
 
         dm.ChangeYapper(hamBankman);
 
-        dm.QueueDialogue("Look at this idiot.Flashing his gains. but I'll get you back JOHN CHIMP");
-        dm.QueueDialogue("You think you’re the king of crypto ? Well, I, HAM BANKMAN, really pull the strings");
-        dm.QueueDialogue("This NFT… it’s the last thing he’s got left of that dog. Time to make him really feel the loss");
+        dm.QueueDialogueWithSound("Look at this idiot.Flashing his gains. but I'll get you back JOHN CHIMP", sfx.HamDialogue());
+        dm.QueueDialogueWithSound("You think you’re the king of crypto ? Well, I, HAM BANKMAN, really pull the strings", sfx.HamDialogue());
+        dm.QueueDialogueWithSound("This NFT… it’s the last thing he’s got left of that dog. Time to make him really feel the loss", sfx.HamDialogue());
 
         yield return new WaitWhile(() => !dm.Done());
 
@@ -91,10 +93,10 @@ public class intromanager : MonoBehaviour
 
         dm.ChangeYapper(johnchimp);
 
-        dm.QueueDialogue("NOOOO My NFT of my dead dog is gone!!! That was my last connection to him!");
-        dm.QueueDialogue("Alright, whoever did this is going down. I’m coming for you.");
-        dm.QueueDialogue("I'll track his IP......");
-        dm.QueueDialogue("Oh thats lucky... looks like he's on this train from Odessa to Ogden, he's gonna get it!");
+        dm.QueueDialogueWithSound("NOOOO My NFT of my dead dog is gone!!! That was my last connection to him!", sfx.MonkeyDialogue());
+        dm.QueueDialogueWithSound("Alright, whoever did this is going down. I’m coming for you.", sfx.MonkeyDialogue());
+        dm.QueueDialogueWithSound("I'll track his IP......", sfx.MonkeyDialogue());
+        dm.QueueDialogueWithSound("Oh thats lucky... looks like he's on this train from Odessa to Ogden, he's gonna get it!", sfx.MonkeyDialogue());
 
         yield return new WaitWhile(() => !dm.Done());
 
@@ -104,7 +106,7 @@ public class intromanager : MonoBehaviour
 
         dm.ChangeYapper(hamBankman);
 
-        dm.QueueDialogue("Let the crypto carnage begin!!!");
+        dm.QueueDialogueWithSound("Let the crypto carnage begin!!!", sfx.HamDialogue());
 
         yield return new WaitWhile(() => !dm.Done());
 
@@ -113,7 +115,7 @@ public class intromanager : MonoBehaviour
         scene3.SetActive(false);
 
         dm.ChangeYapper(johnchimp);
-        dm.QueueDialogue("Ok time to get my dog nft back!");
+        dm.QueueDialogueWithSound("Ok time to get my dog nft back!", sfx.MonkeyDialogue());
 
         yield return new WaitWhile(() => !dm.Done());
 

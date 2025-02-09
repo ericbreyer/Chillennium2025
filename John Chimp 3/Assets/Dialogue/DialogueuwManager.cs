@@ -15,6 +15,7 @@ public class DialogueuwManager : MonoBehaviour
     private Canvas c;
 
     private Queue<string> yapqueue = new Queue<string>();
+    private Queue<AudioClip> clipququq = new Queue<AudioClip>();
 
     private double yapstart;
     private int yapspeed = 20;
@@ -46,8 +47,8 @@ public class DialogueuwManager : MonoBehaviour
             charsToShow = Mathf.Min(charsToShow, to_yap.Length);
             this.yappage.text = this.to_yap.Substring(0, charsToShow);
         } else if(yapqueue.Count > 0) {
-
             StartCoroutine(ShowOneDialogue(yapqueue.Dequeue()));
+            FindObjectOfType<SFXMANGER>().Play(clipququq.Dequeue());
         } else {
             c.gameObject.SetActive(false);
         }
@@ -55,6 +56,12 @@ public class DialogueuwManager : MonoBehaviour
 
     public void QueueDialogue(string t) {
         yapqueue.Enqueue(t);
+        clipququq.Enqueue(null);
+    }
+
+    public void QueueDialogueWithSound(string t, AudioClip c) {
+        yapqueue.Enqueue(t);
+        clipququq.Enqueue(c);
     }
 
     private IEnumerator ShowOneDialogue(string text) {

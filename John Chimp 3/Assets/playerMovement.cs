@@ -150,6 +150,11 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if(Input.GetKeyDown(KeyCode.Q)) {
+            this.clearMovementOrder();
+        }
+
         if (stallBool)
         {
             
