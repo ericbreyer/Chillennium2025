@@ -100,15 +100,15 @@ public class MeshFOV : MonoBehaviour
             float angle = fov.transform.eulerAngles.z - fov.viewAngle / 2 + stepAngle * s;
             Vector3 dir = fov.DirFromAngle(angle, true);
 
-            hit = Physics2D.Raycast(fov.transform.position, dir, fov.viewRadius, fov.obstacleMask);
+            hit = Physics2D.Raycast(fov.transform.position, dir * transform.parent.localScale.x, fov.viewRadius, fov.obstacleMask);
 
             if (hit.collider == null)
             {
-                viewVertices.Add(transform.position + dir.normalized * fov.viewRadius);
+                viewVertices.Add(transform.position + dir.normalized * fov.viewRadius * transform.parent.localScale.x);
             }
             else
             {
-                viewVertices.Add(transform.position + dir.normalized * hit.distance);
+                viewVertices.Add(transform.position + dir.normalized * hit.distance * transform.parent.localScale.x);
             }
         }
 
