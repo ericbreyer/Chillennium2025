@@ -6,6 +6,14 @@ using UnityEngine.UI;
 
 public class playerMovement : MonoBehaviour
 {
+
+    [SerializeField]
+    Sprite[] hatOption;
+    [SerializeField]
+    SpriteRenderer hat;
+    [SerializeField]
+    GameObject deadChimp;
+
     public float walkSpeed;
     public BoxCollider2D bc;
     [SerializeField]
@@ -38,6 +46,9 @@ public class playerMovement : MonoBehaviour
 
     private LineRenderer mlr;
 
+    public void setHat(int hatId) {
+        this.hat.sprite = hatOption[hatId];
+    }
 
     public void addToMovementOrder(MovementBehav mb) {
         if(moving == 0 && (movementOrder.Count == 0 || movementOrder[movementOrder.Count - 1] != mb)) {
@@ -113,14 +124,19 @@ public class playerMovement : MonoBehaviour
     {
         if(facingDir == 1)
         {
+            this.GetComponentInChildren<GunBehaviorScript>().GetComponent<SpriteRenderer>().flipY = false;
            sr.flipX = false;
         }
         else if(facingDir == -1)
         {
+            this.GetComponentInChildren<GunBehaviorScript>().GetComponent<SpriteRenderer>().flipY = true;
             sr.flipX = true;
         }
         if(startBool == 1 & moving == 0) //start a new movement
         {
+
+            setHat(Random.Range(0, hatOption.Length));
+
             Debug.Log(movementOrder.Count+ " <-- moves left");
             if(movementOrder.Count > 0)
             {
@@ -504,15 +520,17 @@ public class playerMovement : MonoBehaviour
         startBool = 0;
         dead = true;
         moving = 0;
+        this.GetComponent<SpriteRenderer>().enabled = false;
+        foreach(SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>()) {
+            sr.enabled = false;
+        }
         clearMovementOrder();
         StartCoroutine(die_co());
     }
 
     private IEnumerator die_co() {
-        for(int i = 0; i < 10000; i++) {
-            this.transform.Rotate(Vector3.forward, (i/360f) / 2);
-            yield return new WaitForEndOfFrame();
-        }
+        var d = Instantiate(deadChimp, this.transform);
+        yield return null;
     }
 
     private void unhide()

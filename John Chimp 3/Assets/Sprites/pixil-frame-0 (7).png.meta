@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0e372f22cbd0840d99f52559a85be271
+guid: 8330a6cadb60e4e169243515dd75e8a4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,11 +48,11 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 24
-  spriteBorder: {x: 0, y: 23, z: 0, w: 0}
+  spriteBorder: {x: 0, y: 5, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: 0
+  spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -117,94 +117,27 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: johnChimp copy_0
+      name: pixil-frame-0 (7)_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 23
-        width: 23
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 5
+        width: 30
+        height: 31
+      alignment: 9
+      pivot: {x: 0.45926487, y: 0.8396219}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9038ac07ee7de42cfb28f52fbe2725eb
-      internalID: -216077301
+      spriteID: 22360a8641bc142908db2bd8f74d18f6
+      internalID: -2015014623
       vertices: []
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: johnChimp copy_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 11
-        width: 13
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7aabaf6d51e5448ddb141ff68e4d4571
-      internalID: -1658417514
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: johnChimp copy_2
-      rect:
-        serializedVersion: 2
-        x: 13
-        y: 11
-        width: 10
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0b674263ad32f448caef5f13ea2cf5da
-      internalID: -1817410920
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: johnChimp copy_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 23
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d80323867bb1b4353bc99087682dccbd
-      internalID: 1313206199
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    outline:
-    - - {x: 0, y: 23}
-      - {x: -11.5, y: -0.0000010053619}
-      - {x: 0.0000010053619, y: -23}
-      - {x: 11.5, y: 0.00000027427225}
+    outline: []
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -215,10 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      johnChimp copy_0: -216077301
-      johnChimp copy_1: -1658417514
-      johnChimp copy_2: -1817410920
-      johnChimp copy_3: 1313206199
+      pixil-frame-0 (7)_0: -2015014623
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

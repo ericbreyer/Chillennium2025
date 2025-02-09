@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class waggle : MonoBehaviour
 {
-    public float wiggleAmount = 4; // Maximum rotation in degrees
-    public float wiggleSpeed = 3;   // Speed of the wiggle
+    public float wiggleAmount = 0.5f; // Maximum translation in units (up/down)
+    public float wiggleSpeed = 3f;    // Speed of the wiggle
+    public Vector3 basepos;
+
+    private void Start() {
+        basepos = transform.position;
+    }
 
     void Update() {
-        // Calculate the wiggle rotation using sine wave for smooth motion
-        float wiggleRotation = Mathf.Sin(Time.time * wiggleSpeed) * wiggleAmount;
+        // Calculate the wiggle offset using sine wave for smooth motion
+        float wiggleOffset = Mathf.Max(wiggleAmount / 2f, Mathf.Sin(Time.time * wiggleSpeed) * wiggleAmount) - wiggleAmount/2f;
 
-        // Apply the calculated rotation around the Z-axis
-        transform.rotation = Quaternion.Euler(0, 0, wiggleRotation);
+        // Apply the calculated offset to the Y position
+        transform.position = new Vector3(basepos.x, basepos.y - wiggleOffset, basepos.z);
     }
 }

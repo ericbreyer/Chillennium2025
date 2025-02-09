@@ -1,5 +1,89 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &217442490961744530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 410149116088161621}
+  - component: {fileID: 8008252197310306400}
+  m_Layer: 0
+  m_Name: HatDeal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &410149116088161621
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217442490961744530}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.072, y: 1.692, z: -0.15446477}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5530602637230221746}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &8008252197310306400
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217442490961744530}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -1732342783
+  m_SortingLayer: 1
+  m_SortingOrder: 300
+  m_Sprite: {fileID: -2015014623, guid: 8330a6cadb60e4e169243515dd75e8a4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 1
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.3, y: 0.5}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &5530602637230221773
 GameObject:
   m_ObjectHideFlags: 0
@@ -34,6 +118,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1776635290123919801}
+  - {fileID: 410149116088161621}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -148,6 +233,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb42aa090fbfeb41811f63609a7bc2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hatOption:
+  - {fileID: 21300000, guid: b01ac403d0d06433abad4f7b2c3d19f4, type: 3}
+  - {fileID: 21300000, guid: 90ab7c81d666e43e6a75afa9ff8f0fa2, type: 3}
+  - {fileID: 21300000, guid: 9efde9b4f6cff48a8a493375efeade2e, type: 3}
+  - {fileID: 21300000, guid: 47bd0c13642064e85a0df83cbc165c6a, type: 3}
+  - {fileID: -2015014623, guid: 8330a6cadb60e4e169243515dd75e8a4, type: 3}
+  hat: {fileID: 8008252197310306400}
+  deadChimp: {fileID: 6413226477737700128, guid: 91454cb7e621545d18ba93c92fac8598, type: 3}
   walkSpeed: 5
   bc: {fileID: 0}
   curAngle: 0
@@ -157,7 +250,7 @@ MonoBehaviour:
   swingRadius: 1.2
   groundMask:
     serializedVersion: 2
-    m_Bits: 8193
+    m_Bits: 65
   jumpTime: 0.2
   startBool: 0
   facingDir: 0
@@ -197,11 +290,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7922751418743906060, guid: 58e2b3e7d332ab94ab1582d3c27009a6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7922751418743906060, guid: 58e2b3e7d332ab94ab1582d3c27009a6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: -0.096
       objectReference: {fileID: 0}
     - target: {fileID: 7922751418743906060, guid: 58e2b3e7d332ab94ab1582d3c27009a6, type: 3}
       propertyPath: m_LocalPosition.z

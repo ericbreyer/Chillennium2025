@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8062646226439952403}
   - component: {fileID: 5863561338686733368}
   - component: {fileID: 4393810320309308554}
-  m_Layer: 4
+  m_Layer: 7
   m_Name: Sniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,6 +144,9 @@ MonoBehaviour:
   initialDir: 1
   startLocalScale: {x: 0, y: 0, z: 0}
   target_x: 0
+  timeToOut: 2
+  fadingOut: 0
+  finishedFadingOut: 0
 --- !u!50 &4393810320309308554
 Rigidbody2D:
   serializedVersion: 4
@@ -175,6 +178,10 @@ PrefabInstance:
     - target: {fileID: 8402396615701235598, guid: e5014a613c99e884a92a47695624e3f7, type: 3}
       propertyPath: m_Name
       value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402396615701235598, guid: e5014a613c99e884a92a47695624e3f7, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8402396615701235599, guid: e5014a613c99e884a92a47695624e3f7, type: 3}
       propertyPath: m_SortingLayer
@@ -272,6 +279,10 @@ PrefabInstance:
     - target: {fileID: 3483335852582775164, guid: a34251df14d9afe4287eed4bddf27fd9, type: 3}
       propertyPath: m_Name
       value: FOV
+      objectReference: {fileID: 0}
+    - target: {fileID: 3483335852582775164, guid: a34251df14d9afe4287eed4bddf27fd9, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8649294293022286350, guid: a34251df14d9afe4287eed4bddf27fd9, type: 3}
       propertyPath: m_RootOrder
