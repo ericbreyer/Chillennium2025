@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using TMPro;
 public enum movType
     {
@@ -43,7 +42,7 @@ public class MovementBehav : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var circle = AssetDatabase.LoadAssetAtPath<Sprite>("Packages/com.unity.2d.sprite/Editor/ObjectMenuCreation/DefaultAssets/Textures/v2/Circle.png");
+        var circle = Resources.Load<Sprite>("Circle.png");
         var go = new GameObject("seqtt");
         this.sequenceTooltip = go.AddComponent<SpriteRenderer>();
         this.sequenceTooltip.sprite = circle;
