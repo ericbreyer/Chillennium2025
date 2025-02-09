@@ -22,6 +22,8 @@ public class FallingCoin : MonoBehaviour
     private void Update()
     {
         age += Time.deltaTime;
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        sr.color = new Color((1-age/lifeSpan), (1-age/lifeSpan), (1-age/lifeSpan), (1-age/lifeSpan));
         if(lifeSpan <= age)
             Destroy(gameObject);
     }

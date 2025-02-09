@@ -168,13 +168,14 @@ public class playerMovement : MonoBehaviour
         if(startBool == 1 & moving == 0) //start a new movement
         {
 
-            setHat(Random.Range(0, hatOption.Length));
+          
 
             Debug.Log(movementOrder.Count+ " <-- moves left");
             if(movementOrder.Count > 0)
             {
+                StartCoroutine(WaitForTime2(0.2f));
                 Debug.Log("Moving set to 1 now");
-                moving = 1;
+                
                 roped = false;
                 swinging = false;
                 lastMov = false;
@@ -579,7 +580,7 @@ public class playerMovement : MonoBehaviour
         Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.5f * facingDir, -1f), checkPoint+ new Vector2(0.49f * facingDir, -1f), Color.red);
         Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(-0.5f * facingDir, -1f), checkPoint+ new Vector2(-0.49f * facingDir, -1f), Color.red);
         Debug.DrawLine(new Vector2(transform.position.x, transform.position.y), checkPoint);
-        if(transform.position.y > bc.bounds.max.y - 1f) return false; //jank
+        if(transform.position.y > bc.bounds.max.y - 2.2f) return false; //jank
 
         return (hit.collider == null && hit2.collider == null && hit3.collider == null);
     }
@@ -708,4 +709,13 @@ public class playerMovement : MonoBehaviour
         Debug.Log("stallbool to falseee");
         stallBool = false;
     }
+
+    IEnumerator WaitForTime2(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        moving = 1;
+    }
+
+
+    
 }
