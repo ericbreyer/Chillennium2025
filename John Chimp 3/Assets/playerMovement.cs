@@ -27,6 +27,10 @@ public class playerMovement : MonoBehaviour
     public bool dead = false;
     private bool roped = false;
     private int jank;
+    private bool lastMov = false;
+
+    private bool hiding;
+
     private Rigidbody2D rb;
     [SerializeField]
     private List<MovementBehav> movementOrder;
@@ -80,10 +84,15 @@ public class playerMovement : MonoBehaviour
        rb = GetComponent<Rigidbody2D>();
         mlr = gameObject.AddComponent<LineRenderer>();
         mlr.materials = new Material[] {Graphic.defaultGraphicMaterial};
-        mlr.startWidth = .1f;
-        mlr.endWidth = .1f;
-        mlr.startColor = Color.red;
-        mlr.endColor = Color.HSVToRGB(.15f, 1, 1);
+        mlr.startWidth = 0.05f;  
+        mlr.endWidth = 0.05f;  
+        mlr.textureMode = LineTextureMode.Tile;
+        mlr.material.mainTextureScale = new Vector2(1, 0.25f); 
+        mlr.startColor = new Color(1, 0, 0, 0.7f);  
+        mlr.endColor = new Color(1, 0, 0, 0.7f);
+        mlr.sortingLayerName = "Default";
+        mlr.sortingOrder = 100;
+        //mlr.endColor = Color.HSVToRGB(.15f, 1, 1);
         mlr.sortingLayerName = "line";
 
         movementOrder = new List<MovementBehav>();
@@ -115,21 +124,32 @@ public class playerMovement : MonoBehaviour
             Debug.Log(movementOrder.Count+ " <-- moves left");
             if(movementOrder.Count > 0)
             {
+                if (hiding)
+                {
+                    unhide();
+                }
                 moving = 1;
                 roped = false;
                 swinging = false;
-                
+                lastMov = false;
+                if(movementOrder.Count == 1)
+                {
+                    lastMov = true;
+                }
                 if(move_cnt > 0) {
-                    Debug.Log("removing move");
                     movementOrder.RemoveAt(0);
                     if (movementOrder.Count == 0) {
                         moving = 0;
                         return;
                     }
                 }
-                Debug.Log("Continuing on with update");
+                if(rb.gravityScale < 1)
+                {
+                    rb.gravityScale = 1;
+                }
                 curMovement = movementOrder[0];
                 move_cnt += 1;
+                
                 switch (curMovement.behav)
                 {
                     case movType.move:
@@ -155,6 +175,15 @@ public class playerMovement : MonoBehaviour
                     case movType.swing:
                     {
                         StartRope();
+                        break;
+                    }
+                    case movType.hide:
+                    {
+                        float target_x = curMovement.movPoint.transform.position.x;
+                        //Debug.Log(target_x);
+                        initialDir = target_x - transform.position.x < 0 ? -1 : 1;
+                        facingDir = initialDir;
+                        
                         break;
                     }
                 }
@@ -192,6 +221,41 @@ public class playerMovement : MonoBehaviour
                     }
                     break;
                 }
+                case movType.hide:
+                {
+                    move();
+                    RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1.1f, Vector2.zero);
+                    if(hit.collider.gameObject == this.curMovement.gameObject)
+                    {
+                        hiding = true;
+                        Debug.Log("hiding here");
+                        this.curMovement.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                        SpriteRenderer sr = this.curMovement.gameObject.GetComponent<SpriteRenderer>();
+                        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, sr.color.a / 2f);
+                        sr.sortingLayerName = "tooltip";
+                        transform.position = curMovement.gameObject.transform.position;
+                        transform.rotation = Quaternion.Euler(0, 0, 90);
+                        sr = GetComponent<SpriteRenderer>();
+                        sr.color = new Color(sr.color.r/2, sr.color.g/2, sr.color.b/2);
+                        moving = 1;
+                        rb.velocity = Vector2.zero;
+                        if (!lastMov)
+                        {
+                            Debug.Log("Calling sub");
+                            StartCoroutine(HideCo());
+                        }
+                        else
+                        {
+                            Debug.Log("hiding planing");
+                            moving = 0;
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("No hide");
+                    }
+                    break;
+                }
             }
         }
     }
@@ -223,7 +287,7 @@ public class playerMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log("moving to grapple");
+            //Debug.Log("moving to grapple");
             move();
         }
         if (roped)
@@ -238,6 +302,7 @@ public class playerMovement : MonoBehaviour
             {
                 //Debug.Log("The ropes didnt work lol");
                 moving = 0;
+                rb.gravityScale = 1;
             }
             else
             {
@@ -245,7 +310,12 @@ public class playerMovement : MonoBehaviour
                 facingDir = curMovement.facingDir == 0 ? facingDir : curMovement.facingDir; //if target is directional, face there
                 rb.velocity = Vector2.zero;
                 moving = 0;
-                //rb.gravityScale = 1;
+                //Debug.Log("we are going to check if its lastMov");
+                if (!lastMov)
+                {
+                    //Debug.Log("grapple was not the last move");
+                    //rb.gravityScale = 1f;
+                }
                 
                             
             }
@@ -289,6 +359,7 @@ public class playerMovement : MonoBehaviour
                 {
                     Debug.Log("moving to grapple");
                     move();
+                    
                 }
                 
             }
@@ -367,6 +438,7 @@ public class playerMovement : MonoBehaviour
         Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(0.5f * facingDir, -1f), checkPoint+ new Vector2(0.49f * facingDir, -1f), Color.red);
         Debug.DrawLine(new Vector2(transform.position.x, transform.position.y) + new Vector2(-0.5f * facingDir, -1f), checkPoint+ new Vector2(-0.49f * facingDir, -1f), Color.red);
         Debug.DrawLine(new Vector2(transform.position.x, transform.position.y), checkPoint);
+        if(transform.position.y > bc.bounds.max.y - 1f) return false; //jank
 
         return (hit.collider == null && hit2.collider == null && hit3.collider == null);
     }
@@ -376,12 +448,10 @@ public class playerMovement : MonoBehaviour
         float target_x = curMovement.movPoint.transform.position.x;
         if (curMovement.movPoint.transform.position.y < bc.bounds.max.y && transform.position.y > bc.bounds.max.y && (isGrounded() || rb.velocity.y > -0.5) && curMovement.movPoint.transform.position.x - 0.51f< bc.bounds.max.x && curMovement.movPoint.transform.position.x + 0.51f> bc.bounds.min.x)
         {
-            Debug.Log("cond met");
             rb.velocity = new Vector2((target_x - gameObject.transform.position.x > 0 ? -1 * walkSpeed : 1 * walkSpeed), rb.velocity.y);
         }
         else
         {
-            Debug.Log("cond not met");
             rb.velocity = new Vector2((target_x - gameObject.transform.position.x > 0 ? walkSpeed : -1 * walkSpeed), rb.velocity.y);
         }
         
@@ -443,5 +513,26 @@ public class playerMovement : MonoBehaviour
             this.transform.Rotate(Vector3.forward, (i/360f) / 2);
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    private void unhide()
+    {
+        hiding = false;
+        Debug.Log("we got here");
+        moving = 0;
+        BoxCollider2D fbc = this.curMovement.gameObject.GetComponent<BoxCollider2D>();
+        fbc.enabled = true;
+        SpriteRenderer sr = this.curMovement.gameObject.GetComponent<SpriteRenderer>();
+        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, sr.color.a * 2f);
+        sr.sortingLayerName = "default";
+        transform.position = new Vector3(transform.position.x, 1f + fbc.bounds.max.y, 0);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        sr = GetComponent<SpriteRenderer>();
+        sr.color = new Color(1, 1, 1);
+    }
+    IEnumerator HideCo()
+    {
+        yield return new WaitForSeconds(2f);
+        unhide();
     }
 }

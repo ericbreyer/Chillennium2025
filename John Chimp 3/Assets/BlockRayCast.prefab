@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 310856644998752505}
   - component: {fileID: 1649851125563519739}
   - component: {fileID: 4818266320977021479}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BlockRayCast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
