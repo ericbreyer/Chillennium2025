@@ -5,10 +5,16 @@ using UnityEngine;
 public class GuardScript : Enemy
 {
 
+    public Animator animationController;
 
+    public override void Start()
+    {
+        animationController = GetComponent<Animator>();
+    }
 
     public override void IdleBehavior()
     {
+        animationController.SetInteger("State", 1);
         if (fov.visible)
         {
             currentState = State.Spotted;
@@ -18,7 +24,7 @@ public class GuardScript : Enemy
 
     public override void SpottedBehavior()
     {
-        Debug.Log("Shoot");
+        animationController.SetInteger("State", 1);
         gun.shoot(fov.dirToTarget);
         target_x = fov.targetLocation.x;
         if (!fov.visible)
@@ -30,6 +36,7 @@ public class GuardScript : Enemy
 
     public override void PursuitBehavior()
     {
+        animationController.SetInteger("State", 0);
         pursuit_time += Time.deltaTime;
         if(pursuit_time > pursuit_timeout)
         {
