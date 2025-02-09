@@ -154,7 +154,8 @@ public class Enemy : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
         }
         rb.velocity = new Vector2((x - gameObject.transform.position.x > 0 ? walkSpeed : -1 * walkSpeed), rb.velocity.y);
-        facingDir = rb.velocity.x < 0 ? -1 : 1;
+        facingDir = x > transform.position.x ? 1 : -1;
+        transform.localScale = new Vector3(facingDir, 1, 1);
         //Debug.Log("Raycast loacation: " + transform.position + " direction: " +  Vector2.right * facingDir + " Length: " + facingDir * walkSpeed * jumpTime);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * facingDir, walkSpeed * jumpTime + 0.5f, groundMask);
         Debug.DrawRay(transform.position, Vector2.right * facingDir, Color.red, walkSpeed * jumpTime + 0.5f);

@@ -49,7 +49,10 @@ public class GuardScript : Enemy
             currentState = State.Spotted;
         }
 
-        moveToTarget(target_x);
+        if(moveToTarget(target_x))
+        {
+            currentState = State.Idle;
+        }
 
     }
 
