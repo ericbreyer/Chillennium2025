@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RealLeve 1.unity
     guid: 81e5ea875e12ccb4ea542646e92013ac
+  - enabled: 1
+    path: Assets/Scenes/RealLeve 2.unity
+    guid: 9b7d7e0ed6e52d7499cf0950115ab0fe
   m_configObjects: {}

@@ -38,9 +38,11 @@ public class GamerManager : MonoBehaviour
     }
 
     public void NextScene() {
+        
         StartCoroutine(FadeCoroutine(() => {
             curScene += 1;
             SceneManager.LoadScene(sceneBuildIdxsForLevels[curScene]);
+            Start();
             }
         ));
     }
@@ -66,8 +68,37 @@ public class GamerManager : MonoBehaviour
     {
         bigFadeBoi = GetComponent<SpriteRenderer>();
         bigFadeBoi.color = new Color(bigFadeBoi.color.r, bigFadeBoi.color.g, bigFadeBoi.color.b, 0);
-        FindObjectOfType<DialogueuwManager>().QueueDialogue("Yo Mista White");
-        FindObjectOfType<DialogueuwManager>().QueueDialogue("aoughapinowrblnwoibhwoibhnwoerinb");
+
+        Debug.Log("Current scene:" +  curScene);
+        FindObjectOfType<DialogueuwManager>().yapqueue.Clear();
+        DialogueuwManager yq = FindObjectOfType<DialogueuwManager>();
+                
+        switch (curScene + 1)
+        {
+            case 1:
+            {
+                FindObjectOfType<DialogueuwManager>().QueueDialogue("Hey yo john, its your boy Ham Altman... I'm here to get you through this mess.");
+                FindObjectOfType<DialogueuwManager>().QueueDialogue("Do you even know how to walk? ....");
+                FindObjectOfType<DialogueuwManager>().QueueDialogue("Didn't think so. Click on objects to plan your move. Once you make a route, click space.");
+                FindObjectOfType<DialogueuwManager>().QueueDialogue("Once you've cleared a traincar of enemies, you can move on by going to the exit arrow");
+                break;
+            }
+            case 2:
+            {
+                FindObjectOfType<DialogueuwManager>().QueueDialogue("Don't leave anyone alive - you don't understand how much this NFT is worth");
+                FindObjectOfType<DialogueuwManager>().QueueDialogue("Oh wait, where's your gun?");
+                FindObjectOfType<DialogueuwManager>().QueueDialogue("You can only shoot while you're moving!? Well, give it a shot...");
+
+                break;
+            }
+            case 3:
+            {
+                FindObjectOfType<DialogueuwManager>().QueueDialogue("What's he doing up there? Eh, take him out anyway");
+                break;
+            }
+        }
+         yq.StartCoroutine(yq.ShowOneDialogue(yq.yapqueue.Dequeue()));
+       
     }
 
     // Update is called once per frame
