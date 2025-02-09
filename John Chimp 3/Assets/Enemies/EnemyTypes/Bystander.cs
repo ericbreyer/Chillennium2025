@@ -61,10 +61,7 @@ public class Bystander : Enemy
         
     }
 
-    public override void CustomBehavior()
-    {
-        base.CustomBehavior();
-    }
+    
 
 
 }
