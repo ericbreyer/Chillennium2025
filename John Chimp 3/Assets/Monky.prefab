@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: -1732342783
   m_SortingLayer: 1
   m_SortingOrder: 300
-  m_Sprite: {fileID: -2015014623, guid: 8330a6cadb60e4e169243515dd75e8a4, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_Size: {x: 0.3, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &5530602637230221773
@@ -246,10 +246,10 @@ MonoBehaviour:
   walkSpeed: 5
   bc: {fileID: 0}
   curAngle: 0
-  ropeSpeed: 10
-  ropeSpeed2: 15
+  ropeSpeed: 11
+  ropeSpeed2: 14
   swingAngularSpeed: 400
-  swingRadius: 1.2
+  swingRadius: 1.3
   groundMask:
     serializedVersion: 2
     m_Bits: 65
@@ -257,6 +257,10 @@ MonoBehaviour:
   startBool: 0
   facingDir: 0
   dead: 0
+  stallTime: 1
+  rope: {fileID: 0}
+  ropemat: {fileID: 2100000, guid: 4bd2ba6bac982d34db60b2c98bde158c, type: 2}
+  tex: {fileID: 0}
   movementOrder:
   - {fileID: 0}
   - {fileID: 0}
@@ -362,6 +366,14 @@ PrefabInstance:
     - target: {fileID: 7922751418743906060, guid: 58e2b3e7d332ab94ab1582d3c27009a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8439256816245734262, guid: 58e2b3e7d332ab94ab1582d3c27009a6, type: 3}
+      propertyPath: gun.spread
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8439256816245734262, guid: 58e2b3e7d332ab94ab1582d3c27009a6, type: 3}
+      propertyPath: gun.cooldown
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58e2b3e7d332ab94ab1582d3c27009a6, type: 3}

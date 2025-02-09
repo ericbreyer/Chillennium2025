@@ -12,8 +12,14 @@ public enum movType
         sit,
         nft,
         hide,
-        nextLevel
+        nextLevel,
+        hat
     }
+
+public enum hatTypes
+{
+    fedora, tophat, beret, propeller, dumbldor
+}
 
 [System.Serializable]
 public class MovementBehav : MonoBehaviour
@@ -26,6 +32,10 @@ public class MovementBehav : MonoBehaviour
     private SpriteRenderer sequenceTooltip;
     private TextMeshPro text;
     private playerMovement player;
+    public int hatType;
+    public Sprite[] hats;
+
+
 
 
     //TODO - add mouse highlight function for this object
@@ -58,11 +68,37 @@ public class MovementBehav : MonoBehaviour
 
         player = FindObjectOfType<playerMovement>();
 
+        if(behav == movType.hat)
+        {
+            GetComponent<SpriteRenderer>().sprite = hats[hatType];
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(behav == movType.nextLevel)
+        {
+            bool thing = false;
+            foreach (GameObject obj in FindObjectsOfType<GameObject>())
+            {
+                if (obj.layer == LayerMask.NameToLayer("Enemy"))
+                {
+                    thing = true;
+                }
+            }
+            if(thing)
+            {
+                GetComponent<BoxCollider2D>().enabled = false;
+                GetComponent<SpriteRenderer>().enabled = false;
+            }
+            else
+            {
+                GetComponent<BoxCollider2D>().enabled = true;
+                GetComponent<SpriteRenderer>().enabled = true;
+            }
+        }
         var sequenceNum = player.getPlaceInMovementOrder(this);
         if (sequenceNum > -1) {
             sequenceTooltip.gameObject.SetActive(true);

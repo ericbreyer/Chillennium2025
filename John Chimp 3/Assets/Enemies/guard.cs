@@ -10,6 +10,7 @@ public class guard : MonoBehaviour
     private Vector2 targetPoint;
 
     private LineRenderer lr;
+    public GameObject laserSource;
 
     [SerializeField]
     private GameObject rifle;
@@ -25,12 +26,13 @@ public class guard : MonoBehaviour
     {
         lr = GetComponent<LineRenderer>();
         lr.positionCount = 2;
-        lr.SetPosition(0, this.transform.position);
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        lr.SetPosition(0, laserSource.transform.position);
         lr.SetPosition(1, targetPoint);
         Vector3 direction = (targetPoint - (Vector2)transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;

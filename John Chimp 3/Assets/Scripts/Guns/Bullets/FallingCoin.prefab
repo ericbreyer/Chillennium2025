@@ -114,6 +114,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 885621aa82d3b6f41ba3832d8c272f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeSpan: 4
+  lifeSpan: 0.5
   age: 0
   clip: {fileID: 8300000, guid: 952bf200794dd014d8727da27bb3818e, type: 3}
