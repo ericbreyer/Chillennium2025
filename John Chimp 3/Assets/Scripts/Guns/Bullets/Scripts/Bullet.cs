@@ -87,6 +87,10 @@ public class Bullet : MonoBehaviour
         collisionPt = collision.GetContact(0).point;
         collisionPt += collision.GetContact(0).normal * 0.1f;
         collisionNormal = collision.GetContact(0).normal;
+
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
+            Destroy(collision.gameObject);
+        }
     }
 }
 

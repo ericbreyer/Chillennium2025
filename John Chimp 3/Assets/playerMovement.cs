@@ -11,6 +11,8 @@ public class playerMovement : MonoBehaviour
     Sprite[] hatOption;
     [SerializeField]
     SpriteRenderer hat;
+    [SerializeField]
+    GameObject deadChimp;
 
     public float walkSpeed;
     public BoxCollider2D bc;
@@ -518,15 +520,17 @@ public class playerMovement : MonoBehaviour
         startBool = 0;
         dead = true;
         moving = 0;
+        this.GetComponent<SpriteRenderer>().enabled = false;
+        foreach(SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>()) {
+            sr.enabled = false;
+        }
         clearMovementOrder();
         StartCoroutine(die_co());
     }
 
     private IEnumerator die_co() {
-        for(int i = 0; i < 10000; i++) {
-            this.transform.Rotate(Vector3.forward, (i/360f) / 2);
-            yield return new WaitForEndOfFrame();
-        }
+        var d = Instantiate(deadChimp, this.transform);
+        yield return null;
     }
 
     private void unhide()
