@@ -15,9 +15,10 @@ public class DialogueuwManager : MonoBehaviour
     private Canvas c;
 
     public Queue<string> yapqueue = new Queue<string>();
+    public Queue<AudioClip> clipququq = new Queue<AudioClip>();
 
     private double yapstart;
-    private int yapspeed = 50;
+    private int yapspeed = 20;
     private string to_yap = "";
 
     // Start is called before the first frame update
@@ -46,8 +47,8 @@ public class DialogueuwManager : MonoBehaviour
             charsToShow = Mathf.Min(charsToShow, to_yap.Length);
             this.yappage.text = this.to_yap.Substring(0, charsToShow);
         } else if(yapqueue.Count > 0) {
-
             StartCoroutine(ShowOneDialogue(yapqueue.Dequeue()));
+            FindObjectOfType<SFXMANGER>().Play(clipququq.Dequeue());
         } else {
             c.gameObject.SetActive(false);
         }
@@ -55,9 +56,15 @@ public class DialogueuwManager : MonoBehaviour
 
     public void QueueDialogue(string t) {
         yapqueue.Enqueue(t);
+        clipququq.Enqueue(null);
     }
 
-    public IEnumerator ShowOneDialogue(string text) {
+    public void QueueDialogueWithSound(string t, AudioClip c) {
+        yapqueue.Enqueue(t);
+        clipququq.Enqueue(c);
+    }
+
+    private IEnumerator ShowOneDialogue(string text) {
         c.gameObject.SetActive(true);
 
         this.yapstart = Time.timeAsDouble;
@@ -68,10 +75,10 @@ public class DialogueuwManager : MonoBehaviour
             return charsShown < to_yap.Length;
         });
         if (yapqueue.Count > 0) {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
         }
         else {
-            yield return new WaitForSeconds(4.5f);
+            yield return new WaitForSeconds(3.5f);
         }
         this.to_yap = "";
     }
