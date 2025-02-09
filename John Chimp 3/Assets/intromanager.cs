@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
+using TMPro;
 
 public class intromanager : MonoBehaviour
 {
@@ -18,6 +20,35 @@ public class intromanager : MonoBehaviour
 
     IEnumerator timeline() {
         var dm = FindObjectOfType<DialogueuwManager>();
+
+
+        var title = FindObjectOfType<titleargsdvoihwobnv>();
+        var tmpuguui = title.GetComponentInChildren<TextMeshProUGUI>();
+        var text = "PREVIOUSLY ON JOHN CHIMP...";
+        for(int i = 0; i <= text.Length; ++i) {
+            tmpuguui.text = text.Substring(0, i);
+            yield return new WaitForSeconds(2f/text.Length);
+        }
+        yield return new WaitForSeconds(1);
+
+        var start = Time.time;
+        var end = start + 1;
+        while(Time.time < end) {
+            title.GetComponentInChildren<TextMeshProUGUI>().color = new Color(title.GetComponentInChildren<TextMeshProUGUI>().color.r, title.GetComponentInChildren<TextMeshProUGUI>().color.g, title.GetComponentInChildren<TextMeshProUGUI>().color.b, 1-(Time.time - start));
+            yield return new WaitForSeconds(0);
+        }
+
+        FindObjectOfType<titleargsdvoihwobnv>().gameObject.SetActive(false);
+
+
+        var vp = FindObjectOfType<VideoPlayer>();
+        vp.Play();
+
+        yield return new WaitForSeconds(3);
+
+        yield return new WaitWhile(() => vp.isPlaying);
+        vp.enabled = false;
+
         dm.ChangeYapper(johnchimp);
 
         dm.QueueDialogue("That's how you turn a couple grand into a couple million, baby! Buy the dip, ride the wave, then dump it all — BOOM, profit!");
@@ -26,8 +57,6 @@ public class intromanager : MonoBehaviour
         dm.QueueDialogue("My dog may be dead, but at least I've got his NFT and a couple mil in the bank");
 
         yield return new WaitWhile(() => !dm.Done());
-        scene1.SetActive(false);
-        scene2.SetActive(true);
 
         dm.ChangeYapper(hamBankman);
         dm.QueueDialogue("Look at this idiot.Flashing his gains like he’s untouchable.Let him enjoy it while it lasts");
