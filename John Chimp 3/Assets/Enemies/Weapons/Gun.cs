@@ -37,17 +37,17 @@ public class Gun : MonoBehaviour
     private void FixedUpdate()
     {
         timeSinceShot += Time.fixedDeltaTime;
-        //if(fov.visible)
-        //{
-        //    Vector3 goalPos = FindObjectOfType<playerMovement>().gameObject.transform.position;
-        //    Vector3 posDir = goalPos - pivotPt.position;
-        //    Vector3 pointingDir = transform.right * parent.localScale.x;
+        if (fov.visible)
+        {
+            Vector3 goalPos = FindObjectOfType<playerMovement>().gameObject.transform.position;
+            Vector3 posDir = goalPos - transform.position;
+            Vector3 pointingDir = transform.right * parent.localScale.x;
 
-        //    float angle = Vector3.SignedAngle(pointingDir, posDir, Vector3.forward);
-        //    transform.Rotate(0, 0, angle);
-        //    Debug.Log("Rotating");
+            float angle = Vector3.SignedAngle(pointingDir, posDir, Vector3.forward) * parent.localScale.x;
+            transform.Rotate(0, 0, angle);
+            Debug.Log("Rotating");
 
-        //}
+        }
     }
 
     // Start is called before the first frame update

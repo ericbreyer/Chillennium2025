@@ -431,6 +431,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8281124431939389880}
     - target: {fileID: -1468383011134512639, guid: a68fed9f014952e4781aea0e6ce546f5, type: 3}
+      propertyPath: timeToOut
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1468383011134512639, guid: a68fed9f014952e4781aea0e6ce546f5, type: 3}
       propertyPath: SurpriseBlock
       value: 
       objectReference: {fileID: 2635815998917132735}
@@ -618,7 +622,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3658120525630622592, guid: d0d0979992459984fa3e6113a9d8b3a4, type: 3}
       propertyPath: timeToOut
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4627060928946539876, guid: d0d0979992459984fa3e6113a9d8b3a4, type: 3}
       propertyPath: m_Layer
