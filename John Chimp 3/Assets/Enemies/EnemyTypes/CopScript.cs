@@ -8,12 +8,14 @@ public class CopScript : Enemy
     
     public float d;
     public GameObject target;
+    public Animator animationController;
 
 
 
     public override void Start()
     {
         base.Start();
+        animationController = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         transform.localScale = new Vector3(facingDir * transform.localScale.x, transform.localScale.y, 1);
         startLocalScale = transform.localScale;
@@ -51,6 +53,7 @@ public class CopScript : Enemy
 
     public override void CustomBehavior()
     {
+        animationController.SetInteger("State", 1);
         if (finishedFadingOut2)
         {
             Destroy(gameObject);
@@ -64,6 +67,8 @@ public class CopScript : Enemy
 
     public override void IdleBehavior()
     {
+
+        animationController.SetInteger("State", 0);
         if(moveToTarget(target_x))
         {
 
@@ -81,6 +86,7 @@ public class CopScript : Enemy
 
     public override void SpottedBehavior()
     {
+        animationController.SetInteger("State", 1);
         gun.shoot(fov.dirToTarget);
         if(!fov.visible)
         {

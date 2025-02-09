@@ -9,11 +9,13 @@ public class Bystander : Enemy
     public bool bulletHeard = false;
     public GameObject copPrefab;
     float x_target;
+    Animator animationController;
 
     public override void Start()
     {
         base.Start();
         x_target = exitSpot.transform.position.x;
+        animationController = GetComponent<Animator>(); 
     }
 
 
@@ -41,11 +43,37 @@ public class Bystander : Enemy
 
     }
 
+    bool unheard = true;
     public override void IdleBehavior()
     {
-        if (bulletHeard)
+        
+        if (unheard && bulletHeard)
         {
+            unheard = false;
+            animationController.SetInteger("State", 1);
+            GameObject JohnChimp = FindObjectOfType<playerMovement>().gameObject;
+            Vector3 storedScale = transform.localScale;
+
+            float diff = JohnChimp.transform.position.x - transform.position.x;
+            Debug.Log("dir: " + diff);
+            if(diff > 0)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+            else
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+                Debug.Log("Look wayward");
+            }
+                
             StartCoroutine(SurprisedLook());
+            Debug.Log("done");
+            transform.localScale = storedScale;
+
+        }
+        else if(!unheard)
+        {
+            animationController.SetInteger("State", 0);
         }
             
     }
@@ -53,6 +81,7 @@ public class Bystander : Enemy
 
     public override void SpottedBehavior()
     {
+        animationController.SetInteger("State", 2);
         if (moveToTarget(x_target))
         {
             copPrefab.SetActive(true);

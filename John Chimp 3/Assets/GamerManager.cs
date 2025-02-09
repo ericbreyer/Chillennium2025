@@ -24,8 +24,16 @@ public class GamerManager : MonoBehaviour
 
 
     public void Respawn() {
-        StartCoroutine(FadeCoroutine( () => 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex)
+        FindObjectOfType<playerMovement>().die();
+        StartCoroutine(newcorouting());
+    }
+
+    private IEnumerator newcorouting()
+    {
+        yield return new WaitForSeconds(3);
+        StartCoroutine(FadeCoroutine(() => {
+            SceneManager.LoadScene(sceneBuildIdxsForLevels[curScene]);
+            }
         ));
     }
 
@@ -38,8 +46,7 @@ public class GamerManager : MonoBehaviour
     }
 
     private IEnumerator FadeCoroutine(Action a) {
-        FindObjectOfType<playerMovement>().die();
-        yield return new WaitForSeconds(3);
+        
         
 
         float SPEEEEEEEEÈD = .005f;
