@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
     public float timeToOut = 2;
     public bool fadingOut = false;
     public bool finishedFadingOut = false;
-    IEnumerator fadeout()
+    public IEnumerator fadeout()
     {
         fadingOut = true;
         SpriteRenderer sr = GetComponent<SpriteRenderer>();

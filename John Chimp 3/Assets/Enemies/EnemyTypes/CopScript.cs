@@ -27,15 +27,39 @@ public class CopScript : Enemy
 
     }
 
-   
 
 
+
+
+    public bool fadingOut2 = false;
+    public bool finishedFadingOut2 = false;
+    public IEnumerator fadeout2()
+    {
+        fadingOut2 = true;
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        Destroy(transform.Find("Gun").gameObject);
+        SpriteRenderer sr2 = GetComponentInChildren<SpriteRenderer>();
+        for (int i = 0; i < 100; i++)
+        {
+            sr2.color = new Color(1, 1, 1, (100f - i) / 100f);
+            sr.color = new Color(1, 1, 1, (100f - i) / 100f);
+            yield return new WaitForSeconds(timeToOut / 100);
+        }
+        finishedFadingOut2 = true;
+        yield return null;
+    }
 
     public override void CustomBehavior()
     {
-        base.CustomBehavior();
+        if (finishedFadingOut2)
+        {
+            Destroy(gameObject);
+        }
 
-
+        //add peace out animation
+        if (!fadingOut2)
+            StartCoroutine(fadeout2());
+        return;
     }
 
     public override void IdleBehavior()
