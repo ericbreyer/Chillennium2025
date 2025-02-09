@@ -12,7 +12,8 @@ public enum movType
         sit,
         nft,
         hide,
-        nextLevel
+        nextLevel,
+        hat
     }
 
 [System.Serializable]

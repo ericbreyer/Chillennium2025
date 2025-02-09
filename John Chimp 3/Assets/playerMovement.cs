@@ -36,6 +36,15 @@ public class playerMovement : MonoBehaviour
     private bool roped = false;
     private int jank;
     private bool lastMov = false;
+    private bool firstMov = true;
+    public float stallTime;
+    private bool stallBool = false;
+    private bool sitting = false;
+    private bool nfting = false;
+    public GameObject rope;
+    public Material ropemat;
+    public Sprite tex;
+    
 
     private bool hiding;
 
@@ -92,7 +101,8 @@ public class playerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       rb = GetComponent<Rigidbody2D>();
+        rope.SetActive(false);
+        rb = GetComponent<Rigidbody2D>();
         mlr = gameObject.AddComponent<LineRenderer>();
         mlr.materials = new Material[] {Graphic.defaultGraphicMaterial};
         mlr.startWidth = 0.05f;  
@@ -118,10 +128,33 @@ public class playerMovement : MonoBehaviour
         {
             startBool = 1;
         }
+        if (roped)
+        {
+            rope.SetActive(true);
+            rope.transform.position = curMovement.transform.position;
+            LineRenderer rlr = rope.GetComponent<LineRenderer>();
+            rlr.material = ropemat;
+            rlr.textureMode = LineTextureMode.Tile;
+            rlr.widthMultiplier = 0.15f;
+            rlr.positionCount = 2;
+            //rlr.material.mainTextureScale = new Vector2(lineRenderer.positionCount, 1);
+            rlr.SetPosition(0, rope.transform.position);
+            rlr.SetPosition(1, this.transform.position);
+        }
+        else
+        {
+            rope.SetActive(false);
+        }
+
     }
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (stallBool)
+        {
+            
+            return;
+        }
         if(facingDir == 1)
         {
             this.GetComponentInChildren<GunBehaviorScript>().GetComponent<SpriteRenderer>().flipY = false;
@@ -152,6 +185,8 @@ public class playerMovement : MonoBehaviour
                     movementOrder.RemoveAt(0);
                     if (movementOrder.Count == 0) {
                         moving = 0;
+                        Debug.Log("stall: first move to true");
+                        firstMov = true;
                         return;
                     }
                 }
@@ -162,6 +197,14 @@ public class playerMovement : MonoBehaviour
                 if (hiding)
                 {
                     unhide();
+                }
+                if (sitting)
+                {
+                    unsit();
+                }
+                if (nfting)
+                {
+                    unnft();
                 }
                 curMovement = movementOrder[0];
                 move_cnt += 1;
@@ -202,6 +245,34 @@ public class playerMovement : MonoBehaviour
                         
                         break;
                     }
+                    case movType.sit:
+                    {
+                        float target_x = curMovement.movPoint.transform.position.x;
+                        //Debug.Log(target_x);
+                        initialDir = target_x - transform.position.x < 0 ? -1 : 1;
+                        facingDir = initialDir;
+                        
+                        break;
+                    }
+                    case movType.nft:
+                    {
+                        float target_x = curMovement.movPoint.transform.position.x;
+                        //Debug.Log(target_x);
+                        initialDir = target_x - transform.position.x < 0 ? -1 : 1;
+                        facingDir = initialDir;
+                        
+                        break;
+                    }
+                    case movType.nextLevel:
+                    {
+                        float target_x = curMovement.movPoint.transform.position.x;
+                        //Debug.Log(target_x);
+                        initialDir = target_x - transform.position.x < 0 ? -1 : 1;
+                        facingDir = initialDir;
+                        
+                        break;
+                    }
+
                 }
             }
             else
@@ -211,7 +282,7 @@ public class playerMovement : MonoBehaviour
                 move_cnt = 0;
             }
         }
-        if(moving == 1)
+        if(moving == 1 && !hiding && !sitting && !nfting);
         {
             switch (curMovement.behav)
             {
@@ -254,16 +325,54 @@ public class playerMovement : MonoBehaviour
                         sr.color = new Color(sr.color.r/2, sr.color.g/2, sr.color.b/2);
                         moving = 1;
                         rb.velocity = Vector2.zero;
-                        if (!lastMov)
-                        {
-                            Debug.Log("Calling sub");
-                            StartCoroutine(HideCo());
-                        }
-                        else
-                        {
-                            Debug.Log("hiding planing");
-                            moving = 0;
-                        }
+                        Debug.Log("Calling sub");
+                        StartCoroutine(HideCo());
+                    }
+                    break;
+                }
+                case movType.sit:
+                {
+                    move();
+                    if(moving == 0)
+                    {
+                        sitting = true;
+                        Debug.Log("sitting here");
+                        facingDir = curMovement.facingDir;
+                        //sit in pose
+                        moving = 1;
+                        rb.velocity = Vector2.zero;
+                        Debug.Log("Calling sub");
+                        StartCoroutine(SitCo());
+                        
+                    }
+                    
+                        
+                    break;
+                }
+                case movType.nft:
+                {
+                    move();
+                    if(moving == 0)
+                    {
+                        sitting = true;
+                        Debug.Log("nfting here");
+                        facingDir = curMovement.facingDir;
+                        moving = 1;
+                        rb.velocity = Vector2.zero;
+                        Debug.Log("Calling sub");
+                        StartCoroutine(NftCo());
+                        
+                    }
+                    
+                        
+                    break;
+                }
+                case movType.nextLevel:
+                {
+                    move();
+                    if(moving == 0)
+                    {
+                        GameObject.FindObjectOfType<GamerManager>().NextScene();
                     }
                     break;
                 }
@@ -532,7 +641,7 @@ public class playerMovement : MonoBehaviour
     {
         hiding = false;
         Debug.Log("we got here");
-        moving = 0;
+        
         BoxCollider2D fbc = this.curMovement.gameObject.GetComponent<BoxCollider2D>();
         fbc.enabled = true;
         SpriteRenderer sr = this.curMovement.gameObject.GetComponent<SpriteRenderer>();
@@ -546,6 +655,36 @@ public class playerMovement : MonoBehaviour
     IEnumerator HideCo()
     {
         yield return new WaitForSeconds(2f);
+        moving = 0;
         unhide();
+    }
+    IEnumerator SitCo()
+    {
+        yield return new WaitForSeconds(1f);
+        moving = 0;
+        unsit();
+    }
+    IEnumerator NftCo()
+    {
+        yield return new WaitForSeconds(5f);
+        moving = 0;
+        unnft();
+    }
+    private void unsit()
+    {
+        sitting = false;
+    }
+    private void unnft()
+    {
+        nfting = false;
+        curMovement.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+    }
+    IEnumerator WaitForTime(float waitTime)
+    {
+        stallBool = true;
+        Debug.Log("stallbool to trueee");
+        yield return new WaitForSeconds(waitTime);
+        Debug.Log("stallbool to falseee");
+        stallBool = false;
     }
 }

@@ -244,10 +244,10 @@ MonoBehaviour:
   walkSpeed: 5
   bc: {fileID: 0}
   curAngle: 0
-  ropeSpeed: 10
-  ropeSpeed2: 15
+  ropeSpeed: 11
+  ropeSpeed2: 14
   swingAngularSpeed: 400
-  swingRadius: 1.2
+  swingRadius: 1.3
   groundMask:
     serializedVersion: 2
     m_Bits: 65
@@ -255,6 +255,7 @@ MonoBehaviour:
   startBool: 0
   facingDir: 0
   dead: 0
+  stallTime: 1
   movementOrder:
   - {fileID: 0}
   - {fileID: 0}
