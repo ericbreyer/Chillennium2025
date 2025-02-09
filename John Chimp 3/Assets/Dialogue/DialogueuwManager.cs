@@ -64,7 +64,7 @@ public class DialogueuwManager : MonoBehaviour
         clipququq.Enqueue(c);
     }
 
-    private IEnumerator ShowOneDialogue(string text) {
+    public IEnumerator ShowOneDialogue(string text) {
         c.gameObject.SetActive(true);
 
         this.yapstart = Time.timeAsDouble;

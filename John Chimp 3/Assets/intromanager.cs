@@ -128,7 +128,7 @@ public class intromanager : MonoBehaviour
             ftb.color = new Color(ftb.color.r, ftb.color.g, ftb.color.b, (Time.time - fstart));
             yield return new WaitForSeconds(0);
         }
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
 
     }
 
