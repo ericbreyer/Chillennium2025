@@ -26,6 +26,10 @@ public class DialogueuwManager : MonoBehaviour
         c.gameObject.SetActive(false);
     }
 
+    public void ChangeYapSpeed(int ys) {
+        yapspeed = ys;
+    }
+
     public void ChangeYapper(Sprite i) {
         yapper.overrideSprite = i;
     }
