@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class intromanager : MonoBehaviour
 {
@@ -127,6 +128,8 @@ public class intromanager : MonoBehaviour
             ftb.color = new Color(ftb.color.r, ftb.color.g, ftb.color.b, (Time.time - fstart));
             yield return new WaitForSeconds(0);
         }
+        SceneManager.LoadScene(1);
+
     }
 
     // Update is called once per frame

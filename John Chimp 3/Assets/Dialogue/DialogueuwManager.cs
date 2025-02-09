@@ -14,11 +14,11 @@ public class DialogueuwManager : MonoBehaviour
     [SerializeField]
     private Canvas c;
 
-    private Queue<string> yapqueue = new Queue<string>();
-    private Queue<AudioClip> clipququq = new Queue<AudioClip>();
+    public Queue<string> yapqueue = new Queue<string>();
+    public Queue<AudioClip> clipququq = new Queue<AudioClip>();
 
     private double yapstart;
-    private int yapspeed = 50;
+    private int yapspeed = 20;
     private string to_yap = "";
 
     // Start is called before the first frame update
@@ -64,7 +64,7 @@ public class DialogueuwManager : MonoBehaviour
         clipququq.Enqueue(c);
     }
 
-    public IEnumerator ShowOneDialogue(string text) {
+    private IEnumerator ShowOneDialogue(string text) {
         c.gameObject.SetActive(true);
 
         this.yapstart = Time.timeAsDouble;
@@ -75,10 +75,10 @@ public class DialogueuwManager : MonoBehaviour
             return charsShown < to_yap.Length;
         });
         if (yapqueue.Count > 0) {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
         }
         else {
-            yield return new WaitForSeconds(4.5f);
+            yield return new WaitForSeconds(3.5f);
         }
         this.to_yap = "";
     }
