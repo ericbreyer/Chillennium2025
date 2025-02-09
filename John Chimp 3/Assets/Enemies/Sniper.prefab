@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8062646226439952403}
   - component: {fileID: 5863561338686733368}
   - component: {fileID: 4393810320309308554}
-  m_Layer: 7
+  - component: {fileID: 4581745243104014599}
+  m_Layer: 4
   m_Name: Sniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,8 +78,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: be4f8300381bb9a439f1c5fb01d8d34e, type: 3}
-  m_Color: {r: 0.5707547, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 768473429, guid: 224411a665cfec442ac995712a9f9c1a, type: 3}
+  m_Color: {r: 0.9533198, g: 1, b: 0.48584908, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -168,6 +169,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &4581745243104014599
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176142266140005332}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2cd37ecb29a216a40b5e40edc759aa0c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &8252728800956864580
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -178,10 +200,6 @@ PrefabInstance:
     - target: {fileID: 8402396615701235598, guid: e5014a613c99e884a92a47695624e3f7, type: 3}
       propertyPath: m_Name
       value: Gun
-      objectReference: {fileID: 0}
-    - target: {fileID: 8402396615701235598, guid: e5014a613c99e884a92a47695624e3f7, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8402396615701235599, guid: e5014a613c99e884a92a47695624e3f7, type: 3}
       propertyPath: m_SortingLayer
@@ -279,10 +297,6 @@ PrefabInstance:
     - target: {fileID: 3483335852582775164, guid: a34251df14d9afe4287eed4bddf27fd9, type: 3}
       propertyPath: m_Name
       value: FOV
-      objectReference: {fileID: 0}
-    - target: {fileID: 3483335852582775164, guid: a34251df14d9afe4287eed4bddf27fd9, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8649294293022286350, guid: a34251df14d9afe4287eed4bddf27fd9, type: 3}
       propertyPath: m_RootOrder
