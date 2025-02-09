@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using TMPro;
 
 public class Hoverable : MonoBehaviour
@@ -31,11 +32,11 @@ public class Hoverable : MonoBehaviour
         this.hilight.SetActive(false);
         this.hilight.transform.parent = this.gameObject.transform;
         var hl =   this.hilight.AddComponent<SpriteRenderer>();
-        hl.sprite = sp;
-        hl.transform.localScale = new Vector2(1.25f, 1.25f);
+        hl.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Packages/com.unity.2d.sprite/Editor/ObjectMenuCreation/DefaultAssets/Textures/v2/Circle.png");
+            hl.transform.localScale = new Vector2(1.25f, 1.25f);
         hl.transform.localPosition = Vector3.zero;
-        hl.color = Color.yellow;
-        hl.sortingLayerName = "hilight";
+        hl.color = new Color(1, 1, 0, .5f);
+        hl.sortingLayerName = "bigtop";
 
 
         var text = new GameObject("txt");

@@ -9,7 +9,10 @@ public enum movType
         jump,
         grapple,
         swing,
-        wait
+        sit,
+        nft,
+        hide,
+        nextLevel
     }
 
 [System.Serializable]
@@ -34,7 +37,8 @@ public class MovementBehav : MonoBehaviour
         var go = new GameObject("seqtt");
         this.sequenceTooltip = go.AddComponent<SpriteRenderer>();
         this.sequenceTooltip.sprite = circle;
-        this.sequenceTooltip.color = Color.red;
+        this.sequenceTooltip.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+        this.sequenceTooltip.color = new Color(1f, 0f, 0f, 0.7f);
         this.sequenceTooltip.transform.parent = this.movPoint.transform;
         this.sequenceTooltip.transform.localPosition = new Vector2(0, 0);
         this.sequenceTooltip.sortingLayerName = "tooltip";

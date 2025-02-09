@@ -49,7 +49,7 @@ MonoBehaviour:
   act2target: 0
   plan2target: 0
   plan2: 0
-  fadeOutTime: 0.8
+  fadeOutTime: 1.5
   pm: {fileID: 0}
   planning:
   - parts:
