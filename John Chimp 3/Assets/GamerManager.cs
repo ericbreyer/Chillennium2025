@@ -77,10 +77,12 @@ public class GamerManager : MonoBehaviour
         {
             case 1:
             {
+
                 FindObjectOfType<DialogueuwManager>().QueueDialogue("Hey yo john, its your boy Ham Altman... I'm here to get you through this mess.");
                 FindObjectOfType<DialogueuwManager>().QueueDialogue("Do you even know how to walk? ....");
                 FindObjectOfType<DialogueuwManager>().QueueDialogue("Didn't think so. Click on objects to plan your move. Once you make a route, click space.");
                 FindObjectOfType<DialogueuwManager>().QueueDialogue("Once you've cleared a traincar of enemies, you can move on by going to the exit arrow");
+                FindObjectOfType<DialogueuwManager>().QueueDialogue("Q - reset route, D - die and restart");
                 break;
             }
             case 2:
