@@ -91,6 +91,11 @@ public class GamerManager : MonoBehaviour
 
                 break;
             }
+            case 3:
+            {
+                FindObjectOfType<DialogueuwManager>().QueueDialogue("What's he doing up there? Eh, take him out anyway");
+                break;
+            }
         }
          yq.StartCoroutine(yq.ShowOneDialogue(yq.yapqueue.Dequeue()));
        
