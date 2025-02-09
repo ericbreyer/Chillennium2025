@@ -170,7 +170,8 @@ public class playerMovement : MonoBehaviour
             this.GetComponentInChildren<GunBehaviorScript>().GetComponent<SpriteRenderer>().flipY = true;
             sr.flipX = true;
         }
-        if(startBool == 1 & moving == 0) //start a new movement
+        Debug.Log("startbool" + startBool + "moving" + moving);
+        if(startBool == 1 && moving == 0) //start a new movement
         {
 
           
@@ -191,7 +192,7 @@ public class playerMovement : MonoBehaviour
                 if(move_cnt > 0) {
                     movementOrder.RemoveAt(0);
                     if (movementOrder.Count == 0) {
-                        moving = 0;
+                        moving = 0; Debug.Log("moving = 0");
                         Debug.Log("stall: first move to true");
                         firstMov = true;
                         return;
@@ -216,6 +217,7 @@ public class playerMovement : MonoBehaviour
                 }
                 curMovement = movementOrder[0];
                 move_cnt += 1;
+                moving = 1;
                 
                 switch (curMovement.behav)
                 {
@@ -448,7 +450,7 @@ public class playerMovement : MonoBehaviour
             if (!roped)
             {
                 //Debug.Log("The ropes didnt work lol");
-                moving = 0;
+                moving = 0; Debug.Log("moving = 0");
                 rb.gravityScale = 1;
             }
             else
@@ -456,7 +458,7 @@ public class playerMovement : MonoBehaviour
                 transform.position = new Vector2(checkPoint.x, checkPoint.y);
                 facingDir = curMovement.facingDir == 0 ? facingDir : curMovement.facingDir; //if target is directional, face there
                 rb.velocity = Vector2.zero;
-                moving = 0;
+                moving = 0; Debug.Log("moving = 0");
                 //Debug.Log("we are going to check if its lastMov");
                 if (!lastMov)
                 {
@@ -567,7 +569,7 @@ public class playerMovement : MonoBehaviour
         if (isGrounded())
         {
             Debug.Log("we got grounded");
-            moving = 0;
+            moving = 0; Debug.Log("moving = 0");
             roped = false;
             rb.velocity = new Vector2(0, 0);
             facingDir = curMovement.facingDir;
@@ -623,7 +625,7 @@ public class playerMovement : MonoBehaviour
             transform.position = new Vector2(target_x, transform.position.y);
             facingDir = curMovement.facingDir == 0 ? facingDir : curMovement.facingDir; //if target is directional, face there
             rb.velocity = Vector2.zero;
-            moving = 0;
+            moving = 0; Debug.Log("moving = 0");
         }
     }
 
@@ -650,7 +652,8 @@ public class playerMovement : MonoBehaviour
     public void die() {
         startBool = 0;
         dead = true;
-        moving = 0;
+
+        moving = 0; Debug.Log("moving = 0");
         this.GetComponent<SpriteRenderer>().enabled = false;
         foreach(SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>()) {
             sr.enabled = false;
@@ -682,19 +685,19 @@ public class playerMovement : MonoBehaviour
     IEnumerator HideCo()
     {
         yield return new WaitForSeconds(2f);
-        moving = 0;
+        moving = 0; Debug.Log("moving = 0");
         unhide();
     }
     IEnumerator SitCo()
     {
         yield return new WaitForSeconds(1f);
-        moving = 0;
+        moving = 0; Debug.Log("moving = 0");
         unsit();
     }
     IEnumerator NftCo()
     {
         yield return new WaitForSeconds(5f);
-        moving = 0;
+        moving = 0; Debug.Log("moving = 0");
         unnft();
     }
     private void unsit()
