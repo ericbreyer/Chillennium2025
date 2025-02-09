@@ -9,6 +9,7 @@ public class GuardScript : Enemy
 
     public override void Start()
     {
+        base.Start();
         animationController = GetComponent<Animator>();
     }
 
