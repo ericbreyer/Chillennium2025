@@ -158,6 +158,14 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.newSize.y
       value: 0.46
       objectReference: {fileID: 0}
+    - target: {fileID: 8800412235500514508, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
+      propertyPath: viewAngle
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 8800412235500514508, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
+      propertyPath: viewRadius
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5863561338686733368, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
@@ -191,7 +199,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &6457934922169710920
 Animator:
   serializedVersion: 5
@@ -239,7 +247,7 @@ MonoBehaviour:
   jumpTime: 0.3
   groundMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 65
   initialDir: 1
   startLocalScale: {x: 0, y: 0, z: 0}
   target_x: 0
@@ -248,5 +256,6 @@ MonoBehaviour:
   finishedFadingOut: 0
   d: 0
   target: {fileID: 6301709056138267080}
+  animationController: {fileID: 0}
   fadingOut2: 0
   finishedFadingOut2: 0

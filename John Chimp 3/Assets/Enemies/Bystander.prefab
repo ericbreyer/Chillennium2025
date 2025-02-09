@@ -77,6 +77,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4393810320309308554, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5463538564462476593, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -154,6 +158,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1176142266140005332, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
   m_PrefabInstance: {fileID: 5221507198178781959}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1954494839534493833
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6351476291347052755}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5f435195d57f49240b0dcb67a88d582a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &-1468383011134512639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +205,7 @@ MonoBehaviour:
   jumpTime: 0.3
   groundMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 65
   initialDir: 1
   startLocalScale: {x: 0, y: 0, z: 0}
   target_x: 0
@@ -191,24 +216,3 @@ MonoBehaviour:
   SurpriseBlock: {fileID: 0}
   bulletHeard: 0
   copPrefab: {fileID: 6230794287535210874, guid: d0d0979992459984fa3e6113a9d8b3a4, type: 3}
---- !u!95 &1954494839534493833
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6351476291347052755}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5f435195d57f49240b0dcb67a88d582a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0

@@ -60,7 +60,7 @@ MonoBehaviour:
   playersInRange: []
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 1073741824
+    m_Bits: 1073741889
   playerMask:
     serializedVersion: 2
     m_Bits: 2147483648

@@ -141,7 +141,7 @@ MonoBehaviour:
   jumpTime: 0.3
   groundMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 65
   initialDir: 1
   startLocalScale: {x: 0, y: 0, z: 0}
   target_x: 0
@@ -169,7 +169,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &4581745243104014599
 Animator:
   serializedVersion: 5
