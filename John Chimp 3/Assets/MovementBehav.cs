@@ -50,7 +50,7 @@ public class MovementBehav : MonoBehaviour
         this.text.rectTransform.sizeDelta = new Vector2(2, 1);
         this.text.fontSize = 5;
         this.text.alignment = TextAlignmentOptions.Midline;
-        this.text.sortingLayerID = SortingLayer.NameToID("tooltip");
+        this.text.sortingLayerID = SortingLayer.NameToID("bigtop");
 
         var hov = this.gameObject.AddComponent<Hoverable>();
         hov.init(this.GetComponent<BoxCollider2D>(), this.GetComponent<SpriteRenderer>().sprite, behav.ToString());
