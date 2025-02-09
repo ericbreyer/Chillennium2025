@@ -256,6 +256,9 @@ MonoBehaviour:
   facingDir: 0
   dead: 0
   stallTime: 1
+  rope: {fileID: 0}
+  ropemat: {fileID: 2100000, guid: 4bd2ba6bac982d34db60b2c98bde158c, type: 2}
+  tex: {fileID: 0}
   movementOrder:
   - {fileID: 0}
   - {fileID: 0}

@@ -46,7 +46,7 @@ public class playerMovement : MonoBehaviour
     public Sprite tex;
     
 
-    private bool hiding;
+    private bool hiding = false;
 
     private Rigidbody2D rb;
     [SerializeField]
@@ -173,6 +173,7 @@ public class playerMovement : MonoBehaviour
             Debug.Log(movementOrder.Count+ " <-- moves left");
             if(movementOrder.Count > 0)
             {
+                Debug.Log("Moving set to 1 now");
                 moving = 1;
                 roped = false;
                 swinging = false;
@@ -194,6 +195,7 @@ public class playerMovement : MonoBehaviour
                 {
                     rb.gravityScale = 1;
                 }
+                
                 if (hiding)
                 {
                     unhide();
@@ -272,6 +274,15 @@ public class playerMovement : MonoBehaviour
                         
                         break;
                     }
+                    case movType.hat:
+                    {
+                        float target_x = curMovement.movPoint.transform.position.x;
+                        //Debug.Log(target_x);
+                        initialDir = target_x - transform.position.x < 0 ? -1 : 1;
+                        facingDir = initialDir;
+                        
+                        break;
+                    }
 
                 }
             }
@@ -282,7 +293,7 @@ public class playerMovement : MonoBehaviour
                 move_cnt = 0;
             }
         }
-        if(moving == 1 && !hiding && !sitting && !nfting);
+        if(moving == 1 && !hiding && !sitting && !nfting)
         {
             switch (curMovement.behav)
             {
@@ -373,6 +384,16 @@ public class playerMovement : MonoBehaviour
                     if(moving == 0)
                     {
                         GameObject.FindObjectOfType<GamerManager>().NextScene();
+                    }
+                    break;
+                }
+                case movType.hat:
+                {
+                    move();
+                    if(moving == 0)
+                    {
+                        setHat(curMovement.hatType);
+                        Destroy(curMovement.gameObject);
                     }
                     break;
                 }
@@ -542,7 +563,7 @@ public class playerMovement : MonoBehaviour
             Debug.Log("we got grounded");
             moving = 0;
             roped = false;
-            rb.velocity = new Vector2(0, rb.velocity.y);
+            rb.velocity = new Vector2(0, 0);
             facingDir = curMovement.facingDir;
             rb.gravityScale = 1;
         }

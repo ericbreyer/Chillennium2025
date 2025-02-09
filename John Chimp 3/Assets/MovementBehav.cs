@@ -16,6 +16,11 @@ public enum movType
         hat
     }
 
+public enum hatTypes
+{
+    fedora, tophat, beret, propeller, dumbldor
+}
+
 [System.Serializable]
 public class MovementBehav : MonoBehaviour
 {
@@ -27,6 +32,10 @@ public class MovementBehav : MonoBehaviour
     private SpriteRenderer sequenceTooltip;
     private TextMeshPro text;
     private playerMovement player;
+    public int hatType;
+    public Sprite[] hats;
+
+
 
 
     //TODO - add mouse highlight function for this object
@@ -58,6 +67,11 @@ public class MovementBehav : MonoBehaviour
 
 
         player = FindObjectOfType<playerMovement>();
+
+        if(behav == movType.hat)
+        {
+            GetComponent<SpriteRenderer>().sprite = hats[hatType];
+        }
 
     }
 
