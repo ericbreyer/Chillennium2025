@@ -44,6 +44,8 @@ public class playerMovement : MonoBehaviour
     public GameObject rope;
     public Material ropemat;
     public Sprite tex;
+
+    bool flAG = false;
     
 
     private bool hiding = false;
@@ -389,8 +391,9 @@ public class playerMovement : MonoBehaviour
                 case movType.nextLevel:
                 {
                     move();
-                    if(moving == 0)
+                    if(moving == 0 && !flAG)
                     {
+                        flAG = true;
                         GameObject.FindObjectOfType<GamerManager>().NextScene();
                     }
                     break;
