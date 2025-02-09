@@ -8,6 +8,7 @@ public class Gun : MonoBehaviour
     public float recoilMag = 0;         //not implemented yet
     public float bulletSpeed = 20;
     public float shootGapSec = 1;
+    public GameObject gunFront;
 
     public float timeSinceShot = 10000;
 
@@ -17,11 +18,13 @@ public class Gun : MonoBehaviour
         {
             GameObject newBullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
             newBullet.GetComponent<Rigidbody2D>().velocity = bulletSpeed * direction;
-    
+
             timeSinceShot = 0;
 
         }
     }
+
+    
 
 
     private void FixedUpdate()

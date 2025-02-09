@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &35843934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 35843935}
+  m_Layer: 2
+  m_Name: GunFront
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &35843935
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35843934}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.355, y: 0.237, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1830628547}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &441592421 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2557849044641078529, guid: 1f16e94f163a2bf4690e4637f8e496b6, type: 3}
@@ -712,22 +743,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 440466741332172747, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: d95eb5b91194ff744809940921fb0b64, type: 3}
-    - target: {fileID: 440466741332172747, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
-      propertyPath: m_Color.b
-      value: 0.4862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 440466741332172747, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
-      propertyPath: m_Color.r
-      value: 0.9529412
-      objectReference: {fileID: 0}
-    - target: {fileID: 440466741332172747, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 440466741332172756, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -771,10 +786,6 @@ PrefabInstance:
     - target: {fileID: 5463538564462476593, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
       propertyPath: m_Layer
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5860931799397466202, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
-      propertyPath: m_SortingOrder
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6461479272400511680, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
       propertyPath: m_RootOrder
@@ -834,6 +845,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
+--- !u!4 &1830628547 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6461479272400511680, guid: 10196d6f4765a434c90997d75a24def9, type: 3}
+  m_PrefabInstance: {fileID: 1830628546}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1982025031 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2060445189751563446, guid: f83fb12c2d9647e49910f6c38ace4b46, type: 3}
