@@ -140,10 +140,6 @@ public class playerMovement : MonoBehaviour
             Debug.Log(movementOrder.Count+ " <-- moves left");
             if(movementOrder.Count > 0)
             {
-                if (hiding)
-                {
-                    unhide();
-                }
                 moving = 1;
                 roped = false;
                 swinging = false;
@@ -162,6 +158,10 @@ public class playerMovement : MonoBehaviour
                 if(rb.gravityScale < 1)
                 {
                     rb.gravityScale = 1;
+                }
+                if (hiding)
+                {
+                    unhide();
                 }
                 curMovement = movementOrder[0];
                 move_cnt += 1;
@@ -240,9 +240,8 @@ public class playerMovement : MonoBehaviour
                 case movType.hide:
                 {
                     move();
-                    RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1.1f, Vector2.zero);
-                    if(hit.collider.gameObject == this.curMovement.gameObject)
-                    {
+                    if(moving == 0) { 
+
                         hiding = true;
                         Debug.Log("hiding here");
                         this.curMovement.gameObject.GetComponent<BoxCollider2D>().enabled = false;
@@ -265,10 +264,6 @@ public class playerMovement : MonoBehaviour
                             Debug.Log("hiding planing");
                             moving = 0;
                         }
-                    }
-                    else
-                    {
-                        Debug.Log("No hide");
                     }
                     break;
                 }

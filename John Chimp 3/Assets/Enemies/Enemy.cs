@@ -160,12 +160,12 @@ public class Enemy : MonoBehaviour
         Debug.DrawRay(transform.position, Vector2.right * facingDir, Color.red, walkSpeed * jumpTime + 0.5f);
         if (hit.collider != null)
         {
-            Debug.Log("we hit something with ray");
-            Debug.Log(hit.collider.gameObject.name);
+            //Debug.Log("we hit something with ray");
+            //Debug.Log(hit.collider.gameObject.name);
         }
         if (hit.collider != null && isGrounded())
         {
-            Debug.Log("Jumping");
+            //Debug.Log("Jumping");
             Collider2D col = hit.collider;
             //Debug.Log(col.gameObject.name);
             Jump(col.bounds.max.y);
