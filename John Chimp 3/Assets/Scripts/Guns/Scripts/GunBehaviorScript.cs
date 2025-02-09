@@ -56,7 +56,7 @@ public class GunBehaviorScript : MonoBehaviour
         }
 
         if(timeSinceShot >= gun.cooldown)
-        {
+        {   
             float spread = gun.spread;
             timeSinceShot = 0;
             //s.Play();
@@ -65,6 +65,12 @@ public class GunBehaviorScript : MonoBehaviour
             Instantiate(sparkEffect, transform);
             Vector3 dir = firePoint.transform.position - transform.position;
             Debug.Log("gun dir " + dir);
+            Bystander[] bystanders = FindObjectsOfType<Bystander>();
+            for(int i = 0; i < bystanders.Length; i++)
+            {
+                bystanders[i].signalBullet();
+            }
+
             bullet.shoot(firePoint.transform.position, gameObject.transform.eulerAngles.z + UnityEngine.Random.Range(-spread, spread)); //idk why we need the 90 but it doesn't work without it
         }
 

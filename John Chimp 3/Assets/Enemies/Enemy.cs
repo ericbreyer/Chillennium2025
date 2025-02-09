@@ -57,8 +57,32 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public float timeToOut = 2;
+    public bool fadingOut = false;
+    public bool finishedFadingOut = false;
+    IEnumerator fadeout()
+    {
+        fadingOut = true;
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        for (int i = 0; i < 100; i++)
+        {
+            sr.color = new Color(1, 1, 1, (100f - i) / 100f);
+            yield return new WaitForSeconds(timeToOut / 100);
+        }
+        finishedFadingOut = true;
+        yield return null;
+    }
+
     public virtual void CustomBehavior()
     {
+        if (finishedFadingOut)
+        {
+            Destroy(gameObject);
+        }
+
+        //add peace out animation
+        if (!fadingOut)
+            StartCoroutine(fadeout());
         return;
     }
 
@@ -121,6 +145,14 @@ public class Enemy : MonoBehaviour
 
     public bool moveToTarget(float x)
     {
+        if(x > transform.position.x)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
         rb.velocity = new Vector2((x - gameObject.transform.position.x > 0 ? walkSpeed : -1 * walkSpeed), rb.velocity.y);
         facingDir = rb.velocity.x < 0 ? -1 : 1;
         //Debug.Log("Raycast loacation: " + transform.position + " direction: " +  Vector2.right * facingDir + " Length: " + facingDir * walkSpeed * jumpTime);
@@ -169,6 +201,8 @@ public class Enemy : MonoBehaviour
                 SpottedBehavior(); break;
             case State.Pursuit:
                 PursuitBehavior(); break;
+            case State.Custom1:
+                CustomBehavior(); break;
 
         }
     }

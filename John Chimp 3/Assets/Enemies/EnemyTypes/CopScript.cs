@@ -23,19 +23,31 @@ public class CopScript : Enemy
         {
             target_x = target.transform.position.x;
         }
-        
+       
+
+    }
+
+   
+
+
+
+    public override void CustomBehavior()
+    {
+        base.CustomBehavior();
 
 
     }
 
-    
-
-
-
-
     public override void IdleBehavior()
     {
-        moveToTarget(target_x);
+        if(moveToTarget(target_x))
+        {
+
+            currentState = State.Custom1;
+            
+        }
+        
+        
         if(fov.visible)
         {
             currentState = State.Spotted;
