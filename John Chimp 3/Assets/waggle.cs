@@ -14,7 +14,7 @@ public class waggle : MonoBehaviour
 
     void Update() {
         // Calculate the wiggle offset using sine wave for smooth motion
-        float wiggleOffset = Mathf.Max(wiggleAmount / 2f, Mathf.Sin(Time.time * wiggleSpeed) * wiggleAmount) - wiggleAmount/2f;
+        float wiggleOffset = Mathf.Max(0, Mathf.Sin(Time.time * wiggleSpeed)) * wiggleAmount;
 
         // Apply the calculated offset to the Y position
         transform.position = new Vector3(basepos.x, basepos.y - wiggleOffset, basepos.z);
